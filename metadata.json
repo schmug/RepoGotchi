@@ -1,0 +1,5 @@
+{
+  "name": "RepoGotchi",
+  "description": "A gamified health monitor for your development teams. Enter a GitHub repository to procedurally generate a unique 'Code Pet' whose health, happiness, and evolution depend on your code quality, commit velocity, and team spirit.",
+  "requestFramePermissions": []
+}
