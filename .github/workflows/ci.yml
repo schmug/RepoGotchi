@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  node:
+    name: Node + workspace tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "pnpm"
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      - name: Test
+        run: pnpm test
+
+      - name: Verify generated/ is in sync with schemas
+        run: |
+          pnpm --filter @repogotchi/contract codegen
+          if ! git diff --quiet packages/contract/generated; then
+            echo "::error::Generated files are out of sync with schemas. Run: pnpm --filter @repogotchi/contract codegen"
+            git --no-pager diff packages/contract/generated
+            exit 1
+          fi
