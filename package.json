@@ -1,0 +1,27 @@
+{
+  "name": "repogotchi",
+  "version": "0.0.0",
+  "private": true,
+  "description": "A pet for every repo: GitHub README badge, local CLI, and macOS menubar companion driven by one shared contract.",
+  "license": "MIT",
+  "author": "schmug",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/schmug/RepoGotchi.git"
+  },
+  "homepage": "https://github.com/schmug/RepoGotchi",
+  "bugs": {
+    "url": "https://github.com/schmug/RepoGotchi/issues"
+  },
+  "packageManager": "pnpm@9.12.0",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "pnpm -r --if-present build",
+    "test": "pnpm -r --if-present test",
+    "typecheck": "pnpm -r --if-present typecheck",
+    "lint": "pnpm -r --if-present lint",
+    "codegen": "pnpm --filter @repogotchi/contract codegen"
+  }
+}
