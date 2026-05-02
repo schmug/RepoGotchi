@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "a3f5b8c2d1e0",
+  "repo": { "host": "github", "owner": "schmug", "name": "RepoGotchi" },
+  "name": "Stacky",
+  "species": "blob",
+  "palette": {
+    "primary": "#3178C6",
+    "secondary": "#1E4E8E",
+    "accent": "#FFD700",
+    "outline": "#1A1A1A"
+  },
+  "personality": "Methodical and precise, prefers small commits and clean diffs.",
+  "traits": ["scholarly", "punctual"],
+  "bornAt": "2026-05-02T19:30:00Z",
+  "visualPrompt": null
+}

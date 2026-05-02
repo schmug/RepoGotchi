@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://repogotchi.app/schemas/v1/pet.json",
+  "title": "Pet",
+  "description": "Canonical identity of a RepoGotchi pet. Stable for the pet's lifetime; live state lives in state.json.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "id",
+    "repo",
+    "name",
+    "species",
+    "palette",
+    "personality",
+    "traits",
+    "bornAt"
+  ],
+  "properties": {
+    "schemaVersion": { "type": "integer", "enum": [1] },
+    "id": {
+      "type": "string",
+      "description": "Stable pet identifier. Convention: sha256(host:owner/name)[:12].",
+      "pattern": "^[a-f0-9]{12}$"
+    },
+    "repo": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["host", "owner", "name"],
+      "properties": {
+        "host": { "type": "string", "enum": ["github"] },
+        "owner": { "type": "string", "minLength": 1 },
+        "name": { "type": "string", "minLength": 1 }
+      }
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 32,
+      "description": "Display name shown in UIs."
+    },
+    "species": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Renderer-recognised species slug. Renderers fall back to 'blob' for unknown values."
+    },
+    "palette": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["primary", "secondary", "accent", "outline"],
+      "properties": {
+        "primary": { "$ref": "#/$defs/hexColor" },
+        "secondary": { "$ref": "#/$defs/hexColor" },
+        "accent": { "$ref": "#/$defs/hexColor" },
+        "outline": { "$ref": "#/$defs/hexColor" }
+      }
+    },
+    "personality": {
+      "type": "string",
+      "maxLength": 280,
+      "description": "Free-form personality description."
+    },
+    "traits": {
+      "type": "array",
+      "description": "Stable trait slugs that drive accessory selection in the SVG renderer.",
+      "items": { "type": "string", "pattern": "^[a-z][a-z0-9-]*$" }
+    },
+    "bornAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "visualPrompt": {
+      "type": ["string", "null"],
+      "maxLength": 1000,
+      "description": "Optional prompt fragment for premium image-generation tier."
+    }
+  },
+  "$defs": {
+    "hexColor": {
+      "type": "string",
+      "pattern": "^#[0-9A-Fa-f]{6}$"
+    }
+  }
+}
