@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "id": "653c0b44fa4d",
+  "repo": {
+    "host": "github",
+    "owner": "schmug",
+    "name": "RepoGotchi"
+  },
+  "name": "Unit",
+  "species": "blob",
+  "palette": {
+    "primary": "#3178C6",
+    "secondary": "#1D4877",
+    "accent": "#FFD700",
+    "outline": "#1A1A1A"
+  },
+  "personality": "",
+  "traits": [],
+  "bornAt": "2025-11-27T13:36:01Z",
+  "visualPrompt": null
+}
