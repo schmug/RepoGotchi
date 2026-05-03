@@ -23,6 +23,8 @@ export type {
 } from "./scoring";
 export { petIdFor } from "./petId";
 export type { RepoRef } from "./petId";
+export { hatchPet } from "./hatch";
+export type { HatchInput } from "./hatch";
 
 export interface ComposeStateInput {
   pet: Pet;
