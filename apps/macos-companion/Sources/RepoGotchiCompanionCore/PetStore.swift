@@ -27,7 +27,11 @@ public final class PetStore {
         reload()
         discoveryTimer?.invalidate()
         discoveryTimer = Timer.scheduledTimer(withTimeInterval: discoveryInterval, repeats: true) { [weak self] _ in
-            Task { @MainActor in self?.reload() }
+            // Re-capture weakly inside the Task so strict concurrency is happy
+            // about crossing the actor boundary.
+            Task { @MainActor [weak self] in
+                self?.reload()
+            }
         }
     }
 
@@ -61,7 +65,9 @@ public final class PetStore {
     private func attachWatcher(to paths: PetPaths) {
         watcher?.stop()
         watcher = PetWatcher(url: paths.state) { [weak self] in
-            Task { @MainActor in self?.reload() }
+            Task { @MainActor [weak self] in
+                self?.reload()
+            }
         }
         watcher?.start()
     }
