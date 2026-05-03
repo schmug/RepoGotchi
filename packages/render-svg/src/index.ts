@@ -7,7 +7,7 @@ import { renderEars } from "./parts/ears";
 import { renderEyes } from "./parts/eyes";
 import { renderMouth } from "./parts/mouth";
 import { renderTrinket } from "./parts/trinket";
-import { resolveTheme, type Theme } from "./theme";
+import { resolveDetail, resolveTheme, type Detail, type Theme } from "./theme";
 import { escapeXmlAttr, escapeXmlText } from "./xml";
 
 export interface RenderOptions {
@@ -22,6 +22,13 @@ export interface RenderOptions {
    * never theme-swapped.
    */
   theme?: Theme;
+  /**
+   * Detail level. Default "auto" picks "compact" when size <= 64 (e.g. macOS
+   * menubar) and "full" otherwise. "compact" tightens the viewBox, drops fine
+   * details (cheeks, trinket, sparkles, zzz, glasses), simplifies ears and
+   * crown, and forces bead eyes for non-mood-overridden moods.
+   */
+  detail?: Detail;
 }
 
 export interface RenderResult {
@@ -40,6 +47,7 @@ export function renderPet(
   const theme = opts.theme ?? "auto";
   const { styleBlock } = resolveTheme(theme);
   const themedOutline = "var(--outline)";
+  const detail = resolveDetail(opts.detail ?? "auto", size);
 
   const variation = derivePetVariation(pet);
   const { primary, secondary } = pet.palette;
@@ -52,16 +60,23 @@ export function renderPet(
   const gradId = `body-${pet.id}`;
   const ariaLabel = `${pet.name}: ${state.statusHeadline} (${state.mood}, level ${state.level})`;
 
+  // Force bead eyes in compact mode for non-mood-overridden moods. Mood
+  // overrides (sad/sick/sleepy/angry/ghost) ignore eyeKind anyway, so this
+  // only affects happy/excited/default.
+  const effectiveEyeKind = detail === "compact" ? "bead" : variation.eyeKind;
+
+  const viewBox = detail === "compact" ? "40 40 320 320" : "0 0 400 400";
+
   const body = renderBody(variation.silhouette, radius, `url(#${gradId})`, themedOutline);
-  const ears = renderEars(variation.earKind, pet, themedOutline);
-  const cheeks = renderCheeks(variation.cheekKind, pet);
-  const trinket = renderTrinket(variation.trinket, pet, themedOutline);
-  const eyes = renderEyes(state.mood, variation.eyeKind, themedOutline);
+  const ears = renderEars(variation.earKind, pet, themedOutline, detail);
+  const cheeks = detail === "compact" ? "" : renderCheeks(variation.cheekKind, pet);
+  const trinket = detail === "compact" ? "" : renderTrinket(variation.trinket, pet, themedOutline);
+  const eyes = renderEyes(state.mood, effectiveEyeKind, themedOutline);
   const mouth = renderMouth(state.mood, state.scores.happiness, themedOutline);
-  const accessories = renderAccessories(pet, state, themedOutline);
+  const accessories = renderAccessories(pet, state, themedOutline, detail);
 
   const svg = `<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 400 400" role="img" aria-label="${escapeXmlAttr(ariaLabel)}">
+<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="${viewBox}" role="img" aria-label="${escapeXmlAttr(ariaLabel)}">
   ${styleBlock}
   <title>${escapeXmlText(pet.name)}</title>
   <desc>${escapeXmlText(state.statusHeadline)}</desc>

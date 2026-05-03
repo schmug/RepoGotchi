@@ -19,7 +19,7 @@ export function renderBody(
 
   switch (silhouette) {
     case "round":
-      return `<ellipse cx="${BODY_CX}" cy="${BODY_CY}" rx="${r}" ry="${ry}" fill="${fillUrl}" stroke="${outline}" stroke-width="3"/>`;
+      return `<ellipse cx="${BODY_CX}" cy="${BODY_CY}" rx="${r}" ry="${ry}" fill="${fillUrl}" stroke="${outline}" stroke-width="3" vector-effect="non-scaling-stroke"/>`;
 
     case "teardrop": {
       // Narrower top, wider bottom. Path traced clockwise from top.
@@ -42,12 +42,12 @@ export function renderBody(
         C ${right} ${num(BODY_CY - radius * 0.3)}
           ${num(BODY_CX + topCtrl)} ${top}
           ${BODY_CX} ${top} Z"
-        fill="${fillUrl}" stroke="${outline}" stroke-width="3"/>`;
+        fill="${fillUrl}" stroke="${outline}" stroke-width="3" vector-effect="non-scaling-stroke"/>`;
     }
 
     case "oval-wide":
       // Squashed and wider; rx grows, ry shrinks proportionally.
-      return `<ellipse cx="${BODY_CX}" cy="${BODY_CY}" rx="${num(radius * 1.25)}" ry="${num(radius * 0.85)}" fill="${fillUrl}" stroke="${outline}" stroke-width="3"/>`;
+      return `<ellipse cx="${BODY_CX}" cy="${BODY_CY}" rx="${num(radius * 1.25)}" ry="${num(radius * 0.85)}" fill="${fillUrl}" stroke="${outline}" stroke-width="3" vector-effect="non-scaling-stroke"/>`;
 
     case "lumpy": {
       // Round body with two soft side bumps.
@@ -73,7 +73,7 @@ export function renderBody(
         C ${num(rightX + bumpOut)} ${num(BODY_CY - radius * 0.3)}
           ${num(BODY_CX + radius * 0.6)} ${top}
           ${BODY_CX} ${top} Z"
-        fill="${fillUrl}" stroke="${outline}" stroke-width="3"/>`;
+        fill="${fillUrl}" stroke="${outline}" stroke-width="3" vector-effect="non-scaling-stroke"/>`;
     }
   }
 }

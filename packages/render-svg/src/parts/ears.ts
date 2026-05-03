@@ -10,9 +10,27 @@ export function renderEars(
   earKind: PetVariation["earKind"],
   pet: Pet,
   outline: string,
+  detail: "full" | "compact",
 ): string {
   const fill = pet.palette.primary;
   const accent = pet.palette.accent;
+
+  if (detail === "compact") {
+    switch (earKind) {
+      case "none":
+        return `
+    <circle cx="${BODY_CX}" cy="80" r="3" fill="${outline}"/>`;
+      case "horn-2":
+        return `
+    <path d="M ${EAR_LX - 6} ${EAR_TOP_Y - 5} L ${EAR_LX} ${EAR_TOP_Y - 30} L ${EAR_LX + 6} ${EAR_TOP_Y - 5} Z" fill="${accent}"/>
+    <path d="M ${EAR_RX - 6} ${EAR_TOP_Y - 5} L ${EAR_RX} ${EAR_TOP_Y - 30} L ${EAR_RX + 6} ${EAR_TOP_Y - 5} Z" fill="${accent}"/>`;
+      default:
+        // pointed-2 / round-2 / floppy-2 / tuft-3 → simple round dots
+        return `
+    <circle cx="${EAR_LX}" cy="${EAR_TOP_Y}" r="22" fill="${fill}"/>
+    <circle cx="${EAR_RX}" cy="${EAR_TOP_Y}" r="22" fill="${fill}"/>`;
+    }
+  }
 
   switch (earKind) {
     case "pointed-2":

@@ -194,6 +194,73 @@ describe("theme", () => {
   });
 });
 
+describe("detail", () => {
+  it("compact mode tightens the viewBox", () => {
+    const { svg } = renderPet(PET, makeState(), { detail: "compact" });
+    expect(svg).toContain('viewBox="40 40 320 320"');
+  });
+
+  it("full mode keeps the canonical viewBox", () => {
+    const { svg } = renderPet(PET, makeState(), { detail: "full" });
+    expect(svg).toContain('viewBox="0 0 400 400"');
+  });
+
+  it("auto resolves to compact when size <= 64", () => {
+    const { svg } = renderPet(PET, makeState(), { size: 44 });
+    expect(svg).toContain('viewBox="40 40 320 320"');
+  });
+
+  it("auto resolves to full when size > 64", () => {
+    const { svg } = renderPet(PET, makeState(), { size: 200 });
+    expect(svg).toContain('viewBox="0 0 400 400"');
+  });
+
+  it("compact drops sparkles, zzz, glasses, cheeks, and trinket", () => {
+    const { svg } = renderPet(
+      { ...PET, traits: ["popular", "scholarly", "active"] },
+      makeState({ mood: "sleepy", signals: { lastCommitDaysAgo: 60 } }),
+      { detail: "compact" },
+    );
+    expect(svg).not.toContain('aria-label="sparkles"');
+    expect(svg).not.toContain('aria-label="zzz"');
+    expect(svg).not.toContain('aria-label="glasses"');
+    expect(svg).not.toContain('aria-label="bowtie"');
+    expect(svg).not.toContain('aria-label="collar"');
+    expect(svg).not.toContain("var(--blush)"); // no blush ovals
+    // Crown remains, simplified.
+    expect(svg).toContain('aria-label="crown"');
+    expect(svg).not.toContain('fill="#FF6B6B"'); // gem dots dropped
+  });
+
+  it("compact preserves ghost opacity for archived pets", () => {
+    const { svg } = renderPet(
+      PET,
+      makeState({ mood: "ghost", signals: { isArchived: true } }),
+      { detail: "compact" },
+    );
+    expect(svg).toContain('opacity="0.55"');
+  });
+
+  it("compact forces bead eyes for non-mood-overridden moods", () => {
+    // pet.id with eyeKind = wide
+    const id = "000000000300";
+    const { svg } = renderPet({ ...PET, id }, makeState({ mood: "happy" }), {
+      detail: "compact",
+    });
+    // Wide eyes use white-filled ellipses; bead eyes are tiny solid circles.
+    expect(svg).not.toContain('fill="white"');
+    expect(svg).toMatch(/<circle cx="150" cy="160" r="4"/);
+  });
+
+  it("compact preserves mood-overridden eye expressions", () => {
+    const { svg } = renderPet(PET, makeState({ mood: "sad" }), {
+      detail: "compact",
+    });
+    // Tear stroke must still be present (mood overrides win).
+    expect(svg).toContain("var(--tear)");
+  });
+});
+
 describe("snapshots", () => {
   for (const mood of [
     "happy",

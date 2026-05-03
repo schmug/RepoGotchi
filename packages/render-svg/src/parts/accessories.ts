@@ -26,23 +26,33 @@ export function renderAccessories(
   pet: Pet,
   state: State,
   outline: string,
+  detail: "full" | "compact",
 ): string {
   const flags = pickAccessories(pet, state);
   const accent = pet.palette.accent;
   const parts: string[] = [];
 
   if (flags.crown) {
-    parts.push(`
+    if (detail === "compact") {
+      // Solid silhouette only — no inner gem dots.
+      parts.push(`
     <g aria-label="crown">
       <path d="M 150 80 L 160 100 L 170 85 L 180 100 L 190 85 L 200 100 L 210 85 L 220 100 L 230 85 L 240 100 L 250 80 L 150 80 Z"
-            fill="${accent}" stroke="${outline}" stroke-width="2"/>
+            fill="${accent}" stroke="${outline}" stroke-width="2" vector-effect="non-scaling-stroke"/>
+    </g>`);
+    } else {
+      parts.push(`
+    <g aria-label="crown">
+      <path d="M 150 80 L 160 100 L 170 85 L 180 100 L 190 85 L 200 100 L 210 85 L 220 100 L 230 85 L 240 100 L 250 80 L 150 80 Z"
+            fill="${accent}" stroke="${outline}" stroke-width="2" vector-effect="non-scaling-stroke"/>
       <circle cx="165" cy="85" r="4" fill="#FF6B6B"/>
       <circle cx="200" cy="80" r="4" fill="#FF6B6B"/>
       <circle cx="235" cy="85" r="4" fill="#FF6B6B"/>
     </g>`);
+    }
   }
 
-  if (flags.glasses) {
+  if (flags.glasses && detail === "full") {
     parts.push(`
     <g aria-label="glasses" opacity="0.85">
       <circle cx="${FACE_CX - EYE_OFFSET}" cy="${EYE_Y}" r="20" fill="none" stroke="${outline}" stroke-width="2"/>
@@ -51,7 +61,7 @@ export function renderAccessories(
     </g>`);
   }
 
-  if (flags.sparkles) {
+  if (flags.sparkles && detail === "full") {
     parts.push(`
     <g aria-label="sparkles">
       <path d="M 320 120 L 325 130 L 330 120 L 325 110 Z" fill="${accent}"/>
@@ -60,7 +70,7 @@ export function renderAccessories(
     </g>`);
   }
 
-  if (flags.zzz) {
+  if (flags.zzz && detail === "full") {
     parts.push(`
     <g aria-label="zzz" font-family="monospace" font-weight="bold" fill="${outline}">
       <text x="290" y="100" font-size="22">Z</text>

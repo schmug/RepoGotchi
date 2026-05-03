@@ -43,3 +43,10 @@ export function resolveTheme(theme: Theme): ResolvedTheme {
   </style>`,
   };
 }
+
+export type Detail = "auto" | "full" | "compact";
+
+export function resolveDetail(detail: Detail, size: number): "full" | "compact" {
+  if (detail === "auto") return size <= 64 ? "compact" : "full";
+  return detail;
+}

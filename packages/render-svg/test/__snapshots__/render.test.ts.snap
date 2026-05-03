@@ -19,7 +19,7 @@ exports[`snapshots > renders the angry mood 1`] = `
   </defs>
   <rect width="400" height="400" fill="transparent"/>
   <g opacity="1">
-    <ellipse cx="200" cy="180" rx="110" ry="121" fill="url(#body-a3f5b8c2d1e0)" stroke="var(--outline)" stroke-width="3"/>
+    <ellipse cx="200" cy="180" rx="110" ry="121" fill="url(#body-a3f5b8c2d1e0)" stroke="var(--outline)" stroke-width="3" vector-effect="non-scaling-stroke"/>
     
     
     <path d="M 138 152 L 162 164" stroke="var(--outline)" stroke-width="4" stroke-linecap="round"/>
@@ -61,7 +61,7 @@ exports[`snapshots > renders the excited mood 1`] = `
   </defs>
   <rect width="400" height="400" fill="transparent"/>
   <g opacity="1">
-    <ellipse cx="200" cy="180" rx="110" ry="121" fill="url(#body-a3f5b8c2d1e0)" stroke="var(--outline)" stroke-width="3"/>
+    <ellipse cx="200" cy="180" rx="110" ry="121" fill="url(#body-a3f5b8c2d1e0)" stroke="var(--outline)" stroke-width="3" vector-effect="non-scaling-stroke"/>
     
     
     <ellipse cx="150" cy="160" rx="10" ry="5" fill="none" stroke="var(--outline)" stroke-width="2.5"/>
@@ -106,7 +106,7 @@ exports[`snapshots > renders the ghost mood 1`] = `
   </defs>
   <rect width="400" height="400" fill="transparent"/>
   <g opacity="0.55">
-    <ellipse cx="200" cy="180" rx="110" ry="121" fill="url(#body-a3f5b8c2d1e0)" stroke="var(--outline)" stroke-width="3"/>
+    <ellipse cx="200" cy="180" rx="110" ry="121" fill="url(#body-a3f5b8c2d1e0)" stroke="var(--outline)" stroke-width="3" vector-effect="non-scaling-stroke"/>
     
     
     <circle cx="150" cy="160" r="10" fill="none" stroke="var(--outline)" stroke-width="2"/>
@@ -148,7 +148,7 @@ exports[`snapshots > renders the happy mood 1`] = `
   </defs>
   <rect width="400" height="400" fill="transparent"/>
   <g opacity="1">
-    <ellipse cx="200" cy="180" rx="110" ry="121" fill="url(#body-a3f5b8c2d1e0)" stroke="var(--outline)" stroke-width="3"/>
+    <ellipse cx="200" cy="180" rx="110" ry="121" fill="url(#body-a3f5b8c2d1e0)" stroke="var(--outline)" stroke-width="3" vector-effect="non-scaling-stroke"/>
     
     
     <ellipse cx="150" cy="160" rx="10" ry="5" fill="none" stroke="var(--outline)" stroke-width="2.5"/>
@@ -192,7 +192,7 @@ exports[`snapshots > renders the sad mood 1`] = `
   </defs>
   <rect width="400" height="400" fill="transparent"/>
   <g opacity="1">
-    <ellipse cx="200" cy="180" rx="110" ry="121" fill="url(#body-a3f5b8c2d1e0)" stroke="var(--outline)" stroke-width="3"/>
+    <ellipse cx="200" cy="180" rx="110" ry="121" fill="url(#body-a3f5b8c2d1e0)" stroke="var(--outline)" stroke-width="3" vector-effect="non-scaling-stroke"/>
     
     
     <path d="M 140 150 Q 150 160 160 150" stroke="var(--outline)" stroke-width="3" fill="none"/>
@@ -236,7 +236,7 @@ exports[`snapshots > renders the sick mood 1`] = `
   </defs>
   <rect width="400" height="400" fill="transparent"/>
   <g opacity="1">
-    <ellipse cx="200" cy="180" rx="110" ry="121" fill="url(#body-a3f5b8c2d1e0)" stroke="var(--outline)" stroke-width="3"/>
+    <ellipse cx="200" cy="180" rx="110" ry="121" fill="url(#body-a3f5b8c2d1e0)" stroke="var(--outline)" stroke-width="3" vector-effect="non-scaling-stroke"/>
     
     
     <path d="M 142 152 L 158 168 M 158 152 L 142 168" stroke="var(--outline)" stroke-width="3"/>
@@ -278,7 +278,7 @@ exports[`snapshots > renders the sleepy mood 1`] = `
   </defs>
   <rect width="400" height="400" fill="transparent"/>
   <g opacity="1">
-    <ellipse cx="200" cy="180" rx="110" ry="121" fill="url(#body-a3f5b8c2d1e0)" stroke="var(--outline)" stroke-width="3"/>
+    <ellipse cx="200" cy="180" rx="110" ry="121" fill="url(#body-a3f5b8c2d1e0)" stroke="var(--outline)" stroke-width="3" vector-effect="non-scaling-stroke"/>
     
     
     <path d="M 140 160 Q 150 166 160 160" stroke="var(--outline)" stroke-width="3" fill="none"/>
