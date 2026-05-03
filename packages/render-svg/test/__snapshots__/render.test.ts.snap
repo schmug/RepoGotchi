@@ -1,0 +1,221 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`snapshots > renders the angry mood 1`] = `
+"<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400" role="img" aria-label="Stacky: Steady commits, green CI (angry, level 5)">
+  <title>Stacky</title>
+  <desc>Steady commits, green CI</desc>
+  <defs>
+    <radialGradient id="body-a3f5b8c2d1e0">
+      <stop offset="0%" stop-color="#1E4E8E"/>
+      <stop offset="100%" stop-color="#3178C6"/>
+    </radialGradient>
+  </defs>
+  <rect width="400" height="400" fill="transparent"/>
+  <g opacity="1">
+    <ellipse cx="140" cy="120" rx="25" ry="35" fill="#3178C6" stroke="#1A1A1A" stroke-width="2"/>
+    <ellipse cx="260" cy="120" rx="25" ry="35" fill="#3178C6" stroke="#1A1A1A" stroke-width="2"/>
+    <ellipse cx="200" cy="180" rx="110" ry="121" fill="url(#body-a3f5b8c2d1e0)" stroke="#1A1A1A" stroke-width="3"/>
+    <ellipse cx="120" cy="190" rx="14" ry="9" fill="#FFB6C1" opacity="0.55"/>
+    <ellipse cx="280" cy="190" rx="14" ry="9" fill="#FFB6C1" opacity="0.55"/>
+    <path d="M 138 152 L 162 164" stroke="#1A1A1A" stroke-width="4" stroke-linecap="round"/>
+    <path d="M 262 152 L 238 164" stroke="#1A1A1A" stroke-width="4" stroke-linecap="round"/>
+    <path d="M 170 228 l 12 -10 l 12 10 l 12 -10 l 12 10" stroke="#1A1A1A" stroke-width="3" fill="none" stroke-linejoin="miter"/>
+    <g aria-label="sparkles">
+      <path d="M 320 120 L 325 130 L 330 120 L 325 110 Z" fill="#FFD700"/>
+      <path d="M 70 120 L 75 130 L 80 120 L 75 110 Z" fill="#FFD700"/>
+      <path d="M 200 50 L 205 60 L 210 50 L 205 40 Z" fill="#FFD700"/>
+    </g>
+  </g>
+</svg>"
+`;
+
+exports[`snapshots > renders the excited mood 1`] = `
+"<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400" role="img" aria-label="Stacky: Steady commits, green CI (excited, level 5)">
+  <title>Stacky</title>
+  <desc>Steady commits, green CI</desc>
+  <defs>
+    <radialGradient id="body-a3f5b8c2d1e0">
+      <stop offset="0%" stop-color="#1E4E8E"/>
+      <stop offset="100%" stop-color="#3178C6"/>
+    </radialGradient>
+  </defs>
+  <rect width="400" height="400" fill="transparent"/>
+  <g opacity="1">
+    <ellipse cx="140" cy="120" rx="25" ry="35" fill="#3178C6" stroke="#1A1A1A" stroke-width="2"/>
+    <ellipse cx="260" cy="120" rx="25" ry="35" fill="#3178C6" stroke="#1A1A1A" stroke-width="2"/>
+    <ellipse cx="200" cy="180" rx="110" ry="121" fill="url(#body-a3f5b8c2d1e0)" stroke="#1A1A1A" stroke-width="3"/>
+    <ellipse cx="120" cy="190" rx="14" ry="9" fill="#FFB6C1" opacity="0.55"/>
+    <ellipse cx="280" cy="190" rx="14" ry="9" fill="#FFB6C1" opacity="0.55"/>
+    <circle cx="150" cy="160" r="9" fill="#1A1A1A"/>
+    <circle cx="250" cy="160" r="9" fill="#1A1A1A"/>
+    <circle cx="152" cy="157" r="2" fill="white"/>
+    <circle cx="252" cy="157" r="2" fill="white"/>
+    <ellipse cx="200" cy="228" rx="22" ry="14" fill="#1A1A1A"/>
+    <ellipse cx="200" cy="224" rx="14" ry="6" fill="#ff6b81"/>
+    <g aria-label="sparkles">
+      <path d="M 320 120 L 325 130 L 330 120 L 325 110 Z" fill="#FFD700"/>
+      <path d="M 70 120 L 75 130 L 80 120 L 75 110 Z" fill="#FFD700"/>
+      <path d="M 200 50 L 205 60 L 210 50 L 205 40 Z" fill="#FFD700"/>
+    </g>
+  </g>
+</svg>"
+`;
+
+exports[`snapshots > renders the ghost mood 1`] = `
+"<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400" role="img" aria-label="Stacky: Steady commits, green CI (ghost, level 5)">
+  <title>Stacky</title>
+  <desc>Steady commits, green CI</desc>
+  <defs>
+    <radialGradient id="body-a3f5b8c2d1e0">
+      <stop offset="0%" stop-color="#1E4E8E"/>
+      <stop offset="100%" stop-color="#3178C6"/>
+    </radialGradient>
+  </defs>
+  <rect width="400" height="400" fill="transparent"/>
+  <g opacity="0.55">
+    <ellipse cx="140" cy="120" rx="25" ry="35" fill="#3178C6" stroke="#1A1A1A" stroke-width="2"/>
+    <ellipse cx="260" cy="120" rx="25" ry="35" fill="#3178C6" stroke="#1A1A1A" stroke-width="2"/>
+    <ellipse cx="200" cy="180" rx="110" ry="121" fill="url(#body-a3f5b8c2d1e0)" stroke="#1A1A1A" stroke-width="3"/>
+    <ellipse cx="120" cy="190" rx="14" ry="9" fill="#FFB6C1" opacity="0.55"/>
+    <ellipse cx="280" cy="190" rx="14" ry="9" fill="#FFB6C1" opacity="0.55"/>
+    <circle cx="150" cy="160" r="10" fill="none" stroke="#1A1A1A" stroke-width="2"/>
+    <circle cx="250" cy="160" r="10" fill="none" stroke="#1A1A1A" stroke-width="2"/>
+    <circle cx="200" cy="224" r="6" fill="#1A1A1A"/>
+    <g aria-label="sparkles">
+      <path d="M 320 120 L 325 130 L 330 120 L 325 110 Z" fill="#FFD700"/>
+      <path d="M 70 120 L 75 130 L 80 120 L 75 110 Z" fill="#FFD700"/>
+      <path d="M 200 50 L 205 60 L 210 50 L 205 40 Z" fill="#FFD700"/>
+    </g>
+  </g>
+</svg>"
+`;
+
+exports[`snapshots > renders the happy mood 1`] = `
+"<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400" role="img" aria-label="Stacky: Steady commits, green CI (happy, level 5)">
+  <title>Stacky</title>
+  <desc>Steady commits, green CI</desc>
+  <defs>
+    <radialGradient id="body-a3f5b8c2d1e0">
+      <stop offset="0%" stop-color="#1E4E8E"/>
+      <stop offset="100%" stop-color="#3178C6"/>
+    </radialGradient>
+  </defs>
+  <rect width="400" height="400" fill="transparent"/>
+  <g opacity="1">
+    <ellipse cx="140" cy="120" rx="25" ry="35" fill="#3178C6" stroke="#1A1A1A" stroke-width="2"/>
+    <ellipse cx="260" cy="120" rx="25" ry="35" fill="#3178C6" stroke="#1A1A1A" stroke-width="2"/>
+    <ellipse cx="200" cy="180" rx="110" ry="121" fill="url(#body-a3f5b8c2d1e0)" stroke="#1A1A1A" stroke-width="3"/>
+    <ellipse cx="120" cy="190" rx="14" ry="9" fill="#FFB6C1" opacity="0.55"/>
+    <ellipse cx="280" cy="190" rx="14" ry="9" fill="#FFB6C1" opacity="0.55"/>
+    <path d="M 140 160 Q 150 150 160 160" stroke="#1A1A1A" stroke-width="3" fill="none"/>
+    <path d="M 240 160 Q 250 150 260 160" stroke="#1A1A1A" stroke-width="3" fill="none"/>
+    <path d="M 160 220 Q 200 236.125 240 220" stroke="#1A1A1A" stroke-width="3" fill="none"/>
+    <g aria-label="sparkles">
+      <path d="M 320 120 L 325 130 L 330 120 L 325 110 Z" fill="#FFD700"/>
+      <path d="M 70 120 L 75 130 L 80 120 L 75 110 Z" fill="#FFD700"/>
+      <path d="M 200 50 L 205 60 L 210 50 L 205 40 Z" fill="#FFD700"/>
+    </g>
+  </g>
+</svg>"
+`;
+
+exports[`snapshots > renders the sad mood 1`] = `
+"<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400" role="img" aria-label="Stacky: Steady commits, green CI (sad, level 5)">
+  <title>Stacky</title>
+  <desc>Steady commits, green CI</desc>
+  <defs>
+    <radialGradient id="body-a3f5b8c2d1e0">
+      <stop offset="0%" stop-color="#1E4E8E"/>
+      <stop offset="100%" stop-color="#3178C6"/>
+    </radialGradient>
+  </defs>
+  <rect width="400" height="400" fill="transparent"/>
+  <g opacity="1">
+    <ellipse cx="140" cy="120" rx="25" ry="35" fill="#3178C6" stroke="#1A1A1A" stroke-width="2"/>
+    <ellipse cx="260" cy="120" rx="25" ry="35" fill="#3178C6" stroke="#1A1A1A" stroke-width="2"/>
+    <ellipse cx="200" cy="180" rx="110" ry="121" fill="url(#body-a3f5b8c2d1e0)" stroke="#1A1A1A" stroke-width="3"/>
+    <ellipse cx="120" cy="190" rx="14" ry="9" fill="#FFB6C1" opacity="0.55"/>
+    <ellipse cx="280" cy="190" rx="14" ry="9" fill="#FFB6C1" opacity="0.55"/>
+    <path d="M 140 150 Q 150 160 160 150" stroke="#1A1A1A" stroke-width="3" fill="none"/>
+    <path d="M 240 150 Q 250 160 260 150" stroke="#1A1A1A" stroke-width="3" fill="none"/>
+    <path d="M 150 165 L 146 178" stroke="#5BA8FF" stroke-width="3" fill="none"/>
+    <path d="M 250 165 L 254 178" stroke="#5BA8FF" stroke-width="3" fill="none"/>
+    <path d="M 160 230 Q 200 210 240 230" stroke="#1A1A1A" stroke-width="3" fill="none"/>
+    <g aria-label="sparkles">
+      <path d="M 320 120 L 325 130 L 330 120 L 325 110 Z" fill="#FFD700"/>
+      <path d="M 70 120 L 75 130 L 80 120 L 75 110 Z" fill="#FFD700"/>
+      <path d="M 200 50 L 205 60 L 210 50 L 205 40 Z" fill="#FFD700"/>
+    </g>
+  </g>
+</svg>"
+`;
+
+exports[`snapshots > renders the sick mood 1`] = `
+"<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400" role="img" aria-label="Stacky: Steady commits, green CI (sick, level 5)">
+  <title>Stacky</title>
+  <desc>Steady commits, green CI</desc>
+  <defs>
+    <radialGradient id="body-a3f5b8c2d1e0">
+      <stop offset="0%" stop-color="#1E4E8E"/>
+      <stop offset="100%" stop-color="#3178C6"/>
+    </radialGradient>
+  </defs>
+  <rect width="400" height="400" fill="transparent"/>
+  <g opacity="1">
+    <ellipse cx="140" cy="120" rx="25" ry="35" fill="#3178C6" stroke="#1A1A1A" stroke-width="2"/>
+    <ellipse cx="260" cy="120" rx="25" ry="35" fill="#3178C6" stroke="#1A1A1A" stroke-width="2"/>
+    <ellipse cx="200" cy="180" rx="110" ry="121" fill="url(#body-a3f5b8c2d1e0)" stroke="#1A1A1A" stroke-width="3"/>
+    <ellipse cx="120" cy="190" rx="14" ry="9" fill="#FFB6C1" opacity="0.55"/>
+    <ellipse cx="280" cy="190" rx="14" ry="9" fill="#FFB6C1" opacity="0.55"/>
+    <path d="M 142 152 L 158 168 M 158 152 L 142 168" stroke="#1A1A1A" stroke-width="3"/>
+    <path d="M 242 152 L 258 168 M 258 152 L 242 168" stroke="#1A1A1A" stroke-width="3"/>
+    <path d="M 160 220 q 10 -8 20 0 t 20 0 t 20 0" stroke="#1A1A1A" stroke-width="3" fill="none"/>
+    <g aria-label="sparkles">
+      <path d="M 320 120 L 325 130 L 330 120 L 325 110 Z" fill="#FFD700"/>
+      <path d="M 70 120 L 75 130 L 80 120 L 75 110 Z" fill="#FFD700"/>
+      <path d="M 200 50 L 205 60 L 210 50 L 205 40 Z" fill="#FFD700"/>
+    </g>
+  </g>
+</svg>"
+`;
+
+exports[`snapshots > renders the sleepy mood 1`] = `
+"<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400" role="img" aria-label="Stacky: Steady commits, green CI (sleepy, level 5)">
+  <title>Stacky</title>
+  <desc>Steady commits, green CI</desc>
+  <defs>
+    <radialGradient id="body-a3f5b8c2d1e0">
+      <stop offset="0%" stop-color="#1E4E8E"/>
+      <stop offset="100%" stop-color="#3178C6"/>
+    </radialGradient>
+  </defs>
+  <rect width="400" height="400" fill="transparent"/>
+  <g opacity="1">
+    <ellipse cx="140" cy="120" rx="25" ry="35" fill="#3178C6" stroke="#1A1A1A" stroke-width="2"/>
+    <ellipse cx="260" cy="120" rx="25" ry="35" fill="#3178C6" stroke="#1A1A1A" stroke-width="2"/>
+    <ellipse cx="200" cy="180" rx="110" ry="121" fill="url(#body-a3f5b8c2d1e0)" stroke="#1A1A1A" stroke-width="3"/>
+    <ellipse cx="120" cy="190" rx="14" ry="9" fill="#FFB6C1" opacity="0.55"/>
+    <ellipse cx="280" cy="190" rx="14" ry="9" fill="#FFB6C1" opacity="0.55"/>
+    <path d="M 140 160 Q 150 166 160 160" stroke="#1A1A1A" stroke-width="3" fill="none"/>
+    <path d="M 240 160 Q 250 166 260 160" stroke="#1A1A1A" stroke-width="3" fill="none"/>
+    <line x1="188" y1="220" x2="212" y2="220" stroke="#1A1A1A" stroke-width="3" stroke-linecap="round"/>
+    <g aria-label="sparkles">
+      <path d="M 320 120 L 325 130 L 330 120 L 325 110 Z" fill="#FFD700"/>
+      <path d="M 70 120 L 75 130 L 80 120 L 75 110 Z" fill="#FFD700"/>
+      <path d="M 200 50 L 205 60 L 210 50 L 205 40 Z" fill="#FFD700"/>
+    </g>
+    <g aria-label="zzz" font-family="monospace" font-weight="bold" fill="#1A1A1A">
+      <text x="290" y="100" font-size="22">Z</text>
+      <text x="310" y="80" font-size="16">z</text>
+      <text x="325" y="65" font-size="12">z</text>
+    </g>
+  </g>
+</svg>"
+`;

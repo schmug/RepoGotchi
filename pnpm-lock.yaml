@@ -32,6 +32,22 @@ importers:
         specifier: ^2.1.5
         version: 2.1.9(@types/node@16.18.126)
 
+  packages/render-svg:
+    dependencies:
+      '@repogotchi/contract':
+        specifier: workspace:*
+        version: link:../contract
+    devDependencies:
+      tsx:
+        specifier: ^4.19.2
+        version: 4.21.0
+      typescript:
+        specifier: ~5.6.3
+        version: 5.6.3
+      vitest:
+        specifier: ^2.1.5
+        version: 2.1.9(@types/node@16.18.126)
+
 packages:
 
   '@apidevtools/json-schema-ref-parser@11.9.3':
@@ -1455,7 +1471,7 @@ snapshots:
       chai: 5.3.3
       tinyrainbow: 1.2.0
 
-  '@vitest/mocker@2.1.9(vite@5.4.21(@types/node@16.18.126))':
+  '@vitest/mocker@2.1.9(vite@5.4.21)':
     dependencies:
       '@vitest/spy': 2.1.9
       estree-walker: 3.0.3
@@ -2084,7 +2100,7 @@ snapshots:
   vitest@2.1.9(@types/node@16.18.126):
     dependencies:
       '@vitest/expect': 2.1.9
-      '@vitest/mocker': 2.1.9(vite@5.4.21(@types/node@16.18.126))
+      '@vitest/mocker': 2.1.9(vite@5.4.21)
       '@vitest/pretty-format': 2.1.9
       '@vitest/runner': 2.1.9
       '@vitest/snapshot': 2.1.9
