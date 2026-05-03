@@ -6,7 +6,7 @@
   "description": "GitHub Action that renders a RepoGotchi pet and commits it back to the repo.",
   "license": "MIT",
   "scripts": {
-    "build": "esbuild src/bin.ts --bundle --platform=node --target=node20 --format=cjs --outfile=dist/index.js --legal-comments=none",
+    "build": "esbuild src/bin.ts --bundle --platform=node --target=node20 --format=cjs --outfile=dist/index.cjs --legal-comments=none",
     "test": "vitest run",
     "typecheck": "tsc --noEmit"
   },
