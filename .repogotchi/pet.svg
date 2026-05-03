@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400" role="img" aria-label="Unit: Healthy and active (happy, level 1)">
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400" role="img" aria-label="Unit: Catching its breath (sleepy, level 1)">
+  <style>
+    :root { --outline: #1A1A1A; --blush: #FFB6C1; --tear: #5BA8FF; }
+    @media (prefers-color-scheme: dark) {
+      :root { --outline: #E8E8E8; --blush: #FF8FA3; --tear: #87C5FF; }
+    }
+  </style>
   <title>Unit</title>
-  <desc>Healthy and active</desc>
+  <desc>Catching its breath</desc>
   <defs>
     <radialGradient id="body-653c0b44fa4d">
       <stop offset="0%" stop-color="#1D4877"/>
@@ -10,18 +16,51 @@
   </defs>
   <rect width="400" height="400" fill="transparent"/>
   <g opacity="1">
-    <ellipse cx="140" cy="120" rx="25" ry="35" fill="#3178C6" stroke="#1A1A1A" stroke-width="2"/>
-    <ellipse cx="260" cy="120" rx="25" ry="35" fill="#3178C6" stroke="#1A1A1A" stroke-width="2"/>
-    <ellipse cx="200" cy="180" rx="108" ry="118.8" fill="url(#body-653c0b44fa4d)" stroke="#1A1A1A" stroke-width="3"/>
-    <ellipse cx="120" cy="190" rx="14" ry="9" fill="#FFB6C1" opacity="0.55"/>
-    <ellipse cx="280" cy="190" rx="14" ry="9" fill="#FFB6C1" opacity="0.55"/>
-    <path d="M 140 160 Q 150 150 160 160" stroke="#1A1A1A" stroke-width="3" fill="none"/>
-    <path d="M 240 160 Q 250 150 260 160" stroke="#1A1A1A" stroke-width="3" fill="none"/>
-    <path d="M 160 220 Q 200 235.5 240 220" stroke="#1A1A1A" stroke-width="3" fill="none"/>
+    <path d="M 200 66.6
+        C 135.2 66.6
+          65 147.6
+          92 180
+        C 65 234
+          135.2 293.4
+          200 293.4
+        C 264.8 293.4
+          335 234
+          308 180
+        C 335 147.6
+          264.8 66.6
+          200 66.6 Z"
+        fill="url(#body-653c0b44fa4d)" stroke="var(--outline)" stroke-width="3" vector-effect="non-scaling-stroke"/>
+    
+    <g opacity="0.7" fill="#FFD700">
+      <circle cx="114" cy="186" r="2"/>
+      <circle cx="122" cy="192" r="2"/>
+      <circle cx="128" cy="188" r="2"/>
+      <circle cx="272" cy="188" r="2"/>
+      <circle cx="278" cy="192" r="2"/>
+      <circle cx="286" cy="186" r="2"/>
+    </g>
+    
+    <path d="M 140 160 Q 150 166 160 160" stroke="var(--outline)" stroke-width="3" fill="none"/>
+    <path d="M 240 160 Q 250 166 260 160" stroke="var(--outline)" stroke-width="3" fill="none"/>
+    <line x1="188" y1="220" x2="212" y2="220" stroke="var(--outline)" stroke-width="3" stroke-linecap="round"/>
+    
+    <g aria-label="bowtie">
+      <path d="M 178 250 L 194 244 L 194 260 Z" fill="#FFD700" stroke="var(--outline)" stroke-width="1.5"/>
+      <path d="M 222 250 L 206 244 L 206 260 Z" fill="#FFD700" stroke="var(--outline)" stroke-width="1.5"/>
+      <rect x="194" y="246" width="12" height="12" rx="2" fill="#FFD700" stroke="var(--outline)" stroke-width="1.5"/>
+    </g>
+    
+    <path d="M 122 110 Q 112 150 140 158 Q 154 130 122 110 Z" fill="#3178C6" stroke="var(--outline)" stroke-width="2"/>
+    <path d="M 278 110 Q 288 150 260 158 Q 246 130 278 110 Z" fill="#3178C6" stroke="var(--outline)" stroke-width="2"/>
     <g aria-label="sparkles">
       <path d="M 320 120 L 325 130 L 330 120 L 325 110 Z" fill="#FFD700"/>
       <path d="M 70 120 L 75 130 L 80 120 L 75 110 Z" fill="#FFD700"/>
       <path d="M 200 50 L 205 60 L 210 50 L 205 40 Z" fill="#FFD700"/>
+    </g>
+    <g aria-label="zzz" font-family="monospace" font-weight="bold" fill="var(--outline)">
+      <text x="290" y="100" font-size="22">Z</text>
+      <text x="310" y="80" font-size="16">z</text>
+      <text x="325" y="65" font-size="12">z</text>
     </g>
   </g>
 </svg>
