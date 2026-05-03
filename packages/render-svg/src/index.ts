@@ -1,12 +1,8 @@
 import type { Pet, State } from "@repogotchi/contract";
-import {
-  escapeXmlAttr,
-  escapeXmlText,
-  pickAccessories,
-  renderAccessories,
-  renderEyes,
-  renderMouth,
-} from "./parts";
+import { escapeXmlAttr, escapeXmlText } from "./xml";
+import { renderEyes } from "./parts/eyes";
+import { renderMouth } from "./parts/mouth";
+import { pickAccessories, renderAccessories } from "./parts/accessories";
 
 export interface RenderOptions {
   /** Output width/height in px. Always renders into a 400x400 viewBox. Default 400. */
@@ -78,4 +74,4 @@ function n(x: number): string {
   return Number(x.toFixed(2)).toString();
 }
 
-export { pickAccessories };
+export { pickAccessories } from "./parts/accessories";
