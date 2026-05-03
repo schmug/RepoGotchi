@@ -1,0 +1,3 @@
+# Copy to .dev.vars (gitignored) and fill in for higher GitHub rate limits.
+# Without a token, the Worker runs unauthenticated (60 req/h per IP).
+GITHUB_TOKEN = ""

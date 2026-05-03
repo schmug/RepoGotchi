@@ -1,0 +1,26 @@
+{
+  "name": "@repogotchi/worker",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Cloudflare Worker serving GET /pet/:owner/:repo.svg for RepoGotchi README badges.",
+  "license": "MIT",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@repogotchi/contract": "workspace:*",
+    "@repogotchi/core": "workspace:*",
+    "@repogotchi/render-svg": "workspace:*"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20241011.0",
+    "@types/node": "^22.10.0",
+    "typescript": "~5.6.3",
+    "vitest": "^2.1.5",
+    "wrangler": "^3.84.0"
+  }
+}
