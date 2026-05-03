@@ -1,0 +1,24 @@
+{
+  "name": "@repogotchi/cli",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Local repogotchi CLI: hatch a pet from your repo, recompute its state from git signals, and write everything under ~/.repogotchi/.",
+  "license": "MIT",
+  "scripts": {
+    "dev": "tsx src/index.ts",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@repogotchi/contract": "workspace:*",
+    "@repogotchi/core": "workspace:*",
+    "@repogotchi/render-svg": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "tsx": "^4.19.2",
+    "typescript": "~5.6.3",
+    "vitest": "^2.1.5"
+  }
+}

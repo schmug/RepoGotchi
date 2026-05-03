@@ -8,6 +8,31 @@ importers:
 
   .: {}
 
+  apps/cli:
+    dependencies:
+      '@repogotchi/contract':
+        specifier: workspace:*
+        version: link:../../packages/contract
+      '@repogotchi/core':
+        specifier: workspace:*
+        version: link:../../packages/core
+      '@repogotchi/render-svg':
+        specifier: workspace:*
+        version: link:../../packages/render-svg
+    devDependencies:
+      '@types/node':
+        specifier: ^22.10.0
+        version: 22.19.17
+      tsx:
+        specifier: ^4.19.2
+        version: 4.21.0
+      typescript:
+        specifier: ~5.6.3
+        version: 5.6.3
+      vitest:
+        specifier: ^2.1.5
+        version: 2.1.9(@types/node@22.19.17)
+
   apps/worker:
     dependencies:
       '@repogotchi/contract':
