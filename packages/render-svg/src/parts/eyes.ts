@@ -21,8 +21,8 @@ export function renderEyes(
       return `
     <path d="M ${lx - 10} ${EYE_Y - 10} Q ${lx} ${EYE_Y} ${lx + 10} ${EYE_Y - 10}" ${stroke}/>
     <path d="M ${rx - 10} ${EYE_Y - 10} Q ${rx} ${EYE_Y} ${rx + 10} ${EYE_Y - 10}" ${stroke}/>
-    <path d="M ${lx} ${EYE_Y + 5} L ${lx - 4} ${EYE_Y + 18}" stroke="#5BA8FF" stroke-width="3" fill="none"/>
-    <path d="M ${rx} ${EYE_Y + 5} L ${rx + 4} ${EYE_Y + 18}" stroke="#5BA8FF" stroke-width="3" fill="none"/>`;
+    <path d="M ${lx} ${EYE_Y + 5} L ${lx - 4} ${EYE_Y + 18}" stroke="var(--tear)" stroke-width="3" fill="none"/>
+    <path d="M ${rx} ${EYE_Y + 5} L ${rx + 4} ${EYE_Y + 18}" stroke="var(--tear)" stroke-width="3" fill="none"/>`;
 
     case "sick":
       return `

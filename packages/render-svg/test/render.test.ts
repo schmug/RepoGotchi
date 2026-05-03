@@ -11,7 +11,9 @@ describe("renderPet", () => {
     expect(svg).toContain("<svg");
     expect(svg).toContain("</svg>");
     expect(svg).toContain(PET.palette.primary);
-    expect(svg).toContain(PET.palette.outline);
+    // Outline is themed via var(--outline); the literal palette outline appears
+    // only inside the <style> block, not as a stroke attribute.
+    expect(svg).toContain("var(--outline)");
     expect(svg).toContain(`<title>${PET.name}</title>`);
     expect(width).toBe(400);
     expect(height).toBe(400);
@@ -135,14 +137,14 @@ describe("variation", () => {
     // Wide eyes use white-filled ellipses; mood-sad eyes do not.
     expect(sadSvg).not.toContain('fill="white" stroke="');
     // Tears (sad mood) must still appear.
-    expect(sadSvg).toContain("#5BA8FF");
+    expect(sadSvg).toContain("var(--tear)");
   });
 
   it("cheeks 'none' produces no blush ovals", () => {
     const id = "000000000020"; // cheekKind = none
     expect(derivePetVariation({ ...PET, id }).cheekKind).toBe("none");
     const { svg } = renderPet({ ...PET, id }, makeState());
-    expect(svg).not.toContain("#FFB6C1");
+    expect(svg).not.toContain("var(--blush)");
   });
 
   it("renders selected trinket aria-labels", () => {
@@ -157,6 +159,35 @@ describe("variation", () => {
       const { svg } = renderPet({ ...PET, id }, makeState());
       expect(svg).toContain(`aria-label="${label}"`);
     }
+  });
+});
+
+describe("theme", () => {
+  it("auto theme emits a prefers-color-scheme media query", () => {
+    const { svg } = renderPet(PET, makeState());
+    expect(svg).toContain("--outline: #1A1A1A");
+    expect(svg).toContain("@media (prefers-color-scheme: dark)");
+    expect(svg).toContain("--outline: #E8E8E8");
+  });
+
+  it("light theme emits no media query", () => {
+    const { svg } = renderPet(PET, makeState(), { theme: "light" });
+    expect(svg).toContain("--outline: #1A1A1A");
+    expect(svg).not.toContain("prefers-color-scheme");
+  });
+
+  it("dark theme emits the dark palette without media query", () => {
+    const { svg } = renderPet(PET, makeState(), { theme: "dark" });
+    expect(svg).toContain("--outline: #E8E8E8");
+    expect(svg).not.toContain("prefers-color-scheme");
+  });
+
+  it("strokes are routed through var(--outline) so theme can swap them", () => {
+    const { svg } = renderPet(PET, makeState());
+    expect(svg).toContain("var(--outline)");
+    // The pet's literal palette outline (#1A1A1A) must NOT appear inline as a
+    // stroke attribute — that would defeat theming.
+    expect(svg).not.toMatch(/stroke="#1A1A1A"/);
   });
 });
 

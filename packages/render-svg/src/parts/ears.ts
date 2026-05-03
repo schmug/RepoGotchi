@@ -9,10 +9,10 @@ const EAR_TOP_Y = 120;
 export function renderEars(
   earKind: PetVariation["earKind"],
   pet: Pet,
+  outline: string,
 ): string {
   const fill = pet.palette.primary;
   const accent = pet.palette.accent;
-  const outline = pet.palette.outline;
 
   switch (earKind) {
     case "pointed-2":

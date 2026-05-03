@@ -22,10 +22,13 @@ export function pickAccessories(pet: Pet, state: State): AccessoryFlags {
   };
 }
 
-export function renderAccessories(pet: Pet, state: State): string {
+export function renderAccessories(
+  pet: Pet,
+  state: State,
+  outline: string,
+): string {
   const flags = pickAccessories(pet, state);
   const accent = pet.palette.accent;
-  const outline = pet.palette.outline;
   const parts: string[] = [];
 
   if (flags.crown) {

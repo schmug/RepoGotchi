@@ -12,8 +12,8 @@ export function renderCheeks(
   switch (cheekKind) {
     case "blush-pink":
       return `
-    <ellipse cx="${BODY_CX - CHEEK_OFFSET}" cy="${CHEEK_Y}" rx="14" ry="9" fill="#FFB6C1" opacity="0.55"/>
-    <ellipse cx="${BODY_CX + CHEEK_OFFSET}" cy="${CHEEK_Y}" rx="14" ry="9" fill="#FFB6C1" opacity="0.55"/>`;
+    <ellipse cx="${BODY_CX - CHEEK_OFFSET}" cy="${CHEEK_Y}" rx="14" ry="9" fill="var(--blush)" opacity="0.7"/>
+    <ellipse cx="${BODY_CX + CHEEK_OFFSET}" cy="${CHEEK_Y}" rx="14" ry="9" fill="var(--blush)" opacity="0.7"/>`;
 
     case "freckles": {
       const accent = pet.palette.accent;

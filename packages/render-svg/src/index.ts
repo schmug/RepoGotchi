@@ -7,6 +7,7 @@ import { renderEars } from "./parts/ears";
 import { renderEyes } from "./parts/eyes";
 import { renderMouth } from "./parts/mouth";
 import { renderTrinket } from "./parts/trinket";
+import { resolveTheme, type Theme } from "./theme";
 import { escapeXmlAttr, escapeXmlText } from "./xml";
 
 export interface RenderOptions {
@@ -14,6 +15,13 @@ export interface RenderOptions {
   size?: number;
   /** CSS color for the background rect. Default "transparent". */
   background?: string;
+  /**
+   * Theme strategy for outline / blush / tear colors. Default "auto" emits a
+   * prefers-color-scheme media query so a single SVG works on light and dark
+   * GitHub READMEs. The pet's identity palette (primary/secondary/accent) is
+   * never theme-swapped.
+   */
+  theme?: Theme;
 }
 
 export interface RenderResult {
@@ -29,9 +37,12 @@ export function renderPet(
 ): RenderResult {
   const size = opts.size ?? 400;
   const bg = opts.background ?? "transparent";
+  const theme = opts.theme ?? "auto";
+  const { styleBlock } = resolveTheme(theme);
+  const themedOutline = "var(--outline)";
 
   const variation = derivePetVariation(pet);
-  const { primary, secondary, outline } = pet.palette;
+  const { primary, secondary } = pet.palette;
 
   const isGhost = state.mood === "ghost" || state.signals.isArchived === true;
   const groupOpacity = isGhost ? 0.55 : 1;
@@ -41,16 +52,17 @@ export function renderPet(
   const gradId = `body-${pet.id}`;
   const ariaLabel = `${pet.name}: ${state.statusHeadline} (${state.mood}, level ${state.level})`;
 
-  const body = renderBody(variation.silhouette, radius, `url(#${gradId})`, outline);
-  const ears = renderEars(variation.earKind, pet);
+  const body = renderBody(variation.silhouette, radius, `url(#${gradId})`, themedOutline);
+  const ears = renderEars(variation.earKind, pet, themedOutline);
   const cheeks = renderCheeks(variation.cheekKind, pet);
-  const trinket = renderTrinket(variation.trinket, pet);
-  const eyes = renderEyes(state.mood, variation.eyeKind, outline);
-  const mouth = renderMouth(state.mood, state.scores.happiness, outline);
-  const accessories = renderAccessories(pet, state);
+  const trinket = renderTrinket(variation.trinket, pet, themedOutline);
+  const eyes = renderEyes(state.mood, variation.eyeKind, themedOutline);
+  const mouth = renderMouth(state.mood, state.scores.happiness, themedOutline);
+  const accessories = renderAccessories(pet, state, themedOutline);
 
   const svg = `<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 400 400" role="img" aria-label="${escapeXmlAttr(ariaLabel)}">
+  ${styleBlock}
   <title>${escapeXmlText(pet.name)}</title>
   <desc>${escapeXmlText(state.statusHeadline)}</desc>
   <defs>

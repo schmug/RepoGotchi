@@ -5,9 +5,9 @@ import { BODY_CX, BODY_CY } from "./body";
 export function renderTrinket(
   trinket: PetVariation["trinket"],
   pet: Pet,
+  outline: string,
 ): string {
   const accent = pet.palette.accent;
-  const outline = pet.palette.outline;
 
   switch (trinket) {
     case "collar":
