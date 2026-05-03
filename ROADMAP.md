@@ -2,7 +2,7 @@
 
 Single source of truth for project status and next steps. Update on every meaningful change.
 
-Last updated: 2026-05-03 (commit `39d1198`).
+Last updated: 2026-05-03 (A+B pet visuals — identity variation + adaptive multi-surface SVG).
 
 ---
 
@@ -11,9 +11,9 @@ Last updated: 2026-05-03 (commit `39d1198`).
 | Surface / package          | Status   | Notes                                                                            |
 | -------------------------- | -------- | -------------------------------------------------------------------------------- |
 | `@repogotchi/contract`     | shipped  | JSON Schemas + TS/Swift codegen, drift-checked in CI. 6 tests.                   |
-| `@repogotchi/core`         | shipped  | Scoring, mood, level/evolution, headline, hatchPet, petIdFor. 30 tests.          |
-| `@repogotchi/render-svg`   | shipped  | Procedural SVG, deterministic, runs in browser/Node/Workers. 17 tests.           |
-| `@repogotchi/worker`       | shipped  | Cloudflare Worker `/pet/:owner/:repo.svg`. 14 tests. Deployed at `repogotchi.cortech.online`. |
+| `@repogotchi/core`         | shipped  | Scoring, mood, level/evolution, headline, hatchPet, petIdFor, derivePetVariation. 38 tests. |
+| `@repogotchi/render-svg`   | shipped  | Procedural SVG, deterministic, theme- and detail-aware, runs in browser/Node/Workers. 34 tests. |
+| `@repogotchi/worker`       | shipped  | Cloudflare Worker `/pet/:owner/:repo.svg`, accepts `?size=&theme=&detail=`. 19 tests. Deployed at `repogotchi.cortech.online`. |
 | `@repogotchi/cli`          | shipped  | `init` / `compute` / `render` / `status`. 20 tests. Not published to npm.        |
 | `@repogotchi/action`       | shipped  | GitHub Action with bundled `dist/`. 2 tests. Dogfooded via the workflow below.   |
 | `apps/macos-companion`     | shipped  | Swift menubar app + companion core lib. 5 tests. Not packaged/notarized.         |
@@ -21,7 +21,18 @@ Last updated: 2026-05-03 (commit `39d1198`).
 | CI                         | shipped  | Node + Swift jobs on every PR. Drift checks for codegen + action bundle.         |
 | Dogfood workflow           | shipped  | `.github/workflows/repogotchi.yml` runs the action on this repo on push to main. |
 
-Test totals: **89 JS + 5 Swift = 94**.
+Test totals: **119 JS + 5 Swift = 124**.
+
+---
+
+## Recent
+
+- **2026-05-03 — A+B pet visual upgrade.** Identity-driven variation
+  (silhouette, ears, eye baseline, cheeks, trinket from `pet.id` hash bytes —
+  1,728 base looks before palette and mood) plus adaptive multi-surface SVG
+  (`prefers-color-scheme` theming and size-aware detail gating). Worker
+  exposes `?size=&theme=&detail=` query params. Multi-species follow-up
+  tracked in [#13](https://github.com/schmug/RepoGotchi/issues/13).
 
 ---
 
