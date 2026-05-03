@@ -23,20 +23,24 @@ export function renderBody(
 
     case "teardrop": {
       // Narrower top, wider bottom. Path traced clockwise from top.
-      const top = num(BODY_CY - radius * 1.15);
-      const left = num(BODY_CX - radius * 1.05);
-      const right = num(BODY_CX + radius * 1.05);
-      const bottom = num(BODY_CY + radius * 1.15);
-      const topCtrl = num(radius * 0.55);
+      const topY = BODY_CY - radius * 1.15;
+      const leftX = BODY_CX - radius * 1.05;
+      const rightX = BODY_CX + radius * 1.05;
+      const bottomY = BODY_CY + radius * 1.15;
+      const topCtrl = radius * 0.55;
+      const top = num(topY);
+      const left = num(leftX);
+      const right = num(rightX);
+      const bottom = num(bottomY);
       return `<path d="M ${BODY_CX} ${top}
-        C ${num(BODY_CX - parseFloat(topCtrl))} ${top}
+        C ${num(BODY_CX - topCtrl)} ${top}
           ${left} ${num(BODY_CY - radius * 0.3)}
           ${left} ${num(BODY_CY + radius * 0.2)}
         C ${left} ${bottom}
           ${right} ${bottom}
           ${right} ${num(BODY_CY + radius * 0.2)}
         C ${right} ${num(BODY_CY - radius * 0.3)}
-          ${num(BODY_CX + parseFloat(topCtrl))} ${top}
+          ${num(BODY_CX + topCtrl)} ${top}
           ${BODY_CX} ${top} Z"
         fill="${fillUrl}" stroke="${outline}" stroke-width="3"/>`;
     }
@@ -47,22 +51,26 @@ export function renderBody(
 
     case "lumpy": {
       // Round body with two soft side bumps.
-      const left = num(BODY_CX - radius);
-      const right = num(BODY_CX + radius);
-      const top = num(BODY_CY - radius * 1.05);
-      const bottom = num(BODY_CY + radius * 1.05);
-      const bumpOut = num(radius * 0.25);
+      const leftX = BODY_CX - radius;
+      const rightX = BODY_CX + radius;
+      const topY = BODY_CY - radius * 1.05;
+      const bottomY = BODY_CY + radius * 1.05;
+      const bumpOut = radius * 0.25;
+      const left = num(leftX);
+      const right = num(rightX);
+      const top = num(topY);
+      const bottom = num(bottomY);
       return `<path d="M ${BODY_CX} ${top}
         C ${num(BODY_CX - radius * 0.6)} ${top}
-          ${num(parseFloat(left) - parseFloat(bumpOut))} ${num(BODY_CY - radius * 0.3)}
+          ${num(leftX - bumpOut)} ${num(BODY_CY - radius * 0.3)}
           ${left} ${BODY_CY}
-        C ${num(parseFloat(left) - parseFloat(bumpOut))} ${num(BODY_CY + radius * 0.5)}
+        C ${num(leftX - bumpOut)} ${num(BODY_CY + radius * 0.5)}
           ${num(BODY_CX - radius * 0.6)} ${bottom}
           ${BODY_CX} ${bottom}
         C ${num(BODY_CX + radius * 0.6)} ${bottom}
-          ${num(parseFloat(right) + parseFloat(bumpOut))} ${num(BODY_CY + radius * 0.5)}
+          ${num(rightX + bumpOut)} ${num(BODY_CY + radius * 0.5)}
           ${right} ${BODY_CY}
-        C ${num(parseFloat(right) + parseFloat(bumpOut))} ${num(BODY_CY - radius * 0.3)}
+        C ${num(rightX + bumpOut)} ${num(BODY_CY - radius * 0.3)}
           ${num(BODY_CX + radius * 0.6)} ${top}
           ${BODY_CX} ${top} Z"
         fill="${fillUrl}" stroke="${outline}" stroke-width="3"/>`;
