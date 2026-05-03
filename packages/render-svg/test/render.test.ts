@@ -165,6 +165,9 @@ describe("variation", () => {
 describe("theme", () => {
   it("auto theme emits a prefers-color-scheme media query", () => {
     const { svg } = renderPet(PET, makeState());
+    // Lock the structural invariant: the CSS vars must live inside a <style>
+    // block, not leak as bare text elsewhere in the SVG.
+    expect(svg).toMatch(/<style>[\s\S]*--outline[\s\S]*<\/style>/);
     expect(svg).toContain("--outline: #1A1A1A");
     expect(svg).toContain("@media (prefers-color-scheme: dark)");
     expect(svg).toContain("--outline: #E8E8E8");

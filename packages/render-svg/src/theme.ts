@@ -5,32 +5,41 @@ export interface ResolvedTheme {
   styleBlock: string;
 }
 
-const LIGHT = {
+interface ThemeColors {
+  outline: string;
+  blush: string;
+  tear: string;
+}
+
+const LIGHT: ThemeColors = {
   outline: "#1A1A1A",
   blush: "#FFB6C1",
   tear: "#5BA8FF",
 };
-const DARK = {
+const DARK: ThemeColors = {
   outline: "#E8E8E8",
   blush: "#FF8FA3",
   tear: "#87C5FF",
 };
 
+function rootRule(c: ThemeColors): string {
+  return `:root { --outline: ${c.outline}; --blush: ${c.blush}; --tear: ${c.tear}; }`;
+}
+
 export function resolveTheme(theme: Theme): ResolvedTheme {
   if (theme === "auto") {
     return {
       styleBlock: `<style>
-    :root { --outline: ${LIGHT.outline}; --blush: ${LIGHT.blush}; --tear: ${LIGHT.tear}; }
+    ${rootRule(LIGHT)}
     @media (prefers-color-scheme: dark) {
-      :root { --outline: ${DARK.outline}; --blush: ${DARK.blush}; --tear: ${DARK.tear}; }
+      ${rootRule(DARK)}
     }
   </style>`,
     };
   }
-  const v = theme === "dark" ? DARK : LIGHT;
   return {
     styleBlock: `<style>
-    :root { --outline: ${v.outline}; --blush: ${v.blush}; --tear: ${v.tear}; }
+    ${rootRule(theme === "dark" ? DARK : LIGHT)}
   </style>`,
   };
 }
