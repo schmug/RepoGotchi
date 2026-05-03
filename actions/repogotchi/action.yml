@@ -1,0 +1,38 @@
+name: RepoGotchi
+description: Render a pet for this repo and commit it as a README-friendly SVG badge.
+author: schmug
+branding:
+  icon: heart
+  color: purple
+
+inputs:
+  commit:
+    description: Commit pet.svg + pet.json + state.json back to the repo when they change.
+    required: false
+    default: "true"
+  commit-message:
+    description: Commit message used when committing pet files.
+    required: false
+    default: "chore(repogotchi): refresh pet"
+  output-dir:
+    description: Directory inside the repo where pet files are written.
+    required: false
+    default: ".repogotchi"
+  github-token:
+    description: Token used for the GitHub API and (when commit=true) for pushing commits.
+    required: false
+    default: ${{ github.token }}
+
+outputs:
+  pet-id:
+    description: The 12-char pet identifier.
+  pet-name:
+    description: Display name of the pet.
+  status-headline:
+    description: One-line status headline for this run.
+  changed:
+    description: '"true" if the action wrote new bytes, "false" if everything was already up to date.'
+
+runs:
+  using: node20
+  main: dist/index.js

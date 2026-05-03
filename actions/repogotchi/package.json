@@ -1,0 +1,27 @@
+{
+  "name": "@repogotchi/action",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "GitHub Action that renders a RepoGotchi pet and commits it back to the repo.",
+  "license": "MIT",
+  "scripts": {
+    "build": "esbuild src/bin.ts --bundle --platform=node --target=node20 --format=cjs --outfile=dist/index.js --legal-comments=none",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@actions/core": "^1.11.1",
+    "@actions/exec": "^1.1.1",
+    "@actions/github": "^6.0.0",
+    "@repogotchi/contract": "workspace:*",
+    "@repogotchi/core": "workspace:*",
+    "@repogotchi/render-svg": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "esbuild": "^0.24.0",
+    "typescript": "~5.6.3",
+    "vitest": "^2.1.5"
+  }
+}

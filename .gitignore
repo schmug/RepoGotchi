@@ -10,6 +10,9 @@ dist/
 build/
 out/
 *.tsbuildinfo
+# Exception: actions/repogotchi/dist/ is the bundled action consumers run,
+# so it must be committed.
+!actions/repogotchi/dist/
 
 # Test coverage
 coverage/
