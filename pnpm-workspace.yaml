@@ -1,0 +1,5 @@
+packages:
+  - "packages/*"
+  - "apps/cli"
+  - "apps/worker"
+  - "actions/repogotchi"

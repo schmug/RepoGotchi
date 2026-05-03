@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "petId": "a3f5b8c2d1e0",
+  "computedAt": "2026-05-02T19:32:00Z",
+  "scores": { "health": 78, "happiness": 65, "energy": 50, "cleanliness": 80 },
+  "mood": "happy",
+  "level": 5,
+  "evolutionStage": "juvenile",
+  "statusHeadline": "Steady commits, green CI",
+  "signals": {
+    "lastCommitDaysAgo": 1,
+    "openIssues": 3,
+    "openPullRequests": 1,
+    "contributors": 4,
+    "stars": 12,
+    "isArchived": false,
+    "ciStatus": "passing"
+  },
+  "source": "cli"
+}

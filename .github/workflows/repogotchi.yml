@@ -1,0 +1,25 @@
+name: RepoGotchi
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: repogotchi-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  refresh:
+    name: Refresh repo pet
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run RepoGotchi action
+        uses: ./actions/repogotchi
+        with:
+          commit: "true"

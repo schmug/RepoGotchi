@@ -1,0 +1,28 @@
+{
+  "name": "@repogotchi/render-svg",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Deterministic procedural SVG renderer for RepoGotchi pets. Pure function, no I/O, runs in browser/Node/Workers.",
+  "license": "MIT",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "files": ["src"],
+  "scripts": {
+    "demo": "tsx scripts/demo.ts",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@repogotchi/contract": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "tsx": "^4.19.2",
+    "typescript": "~5.6.3",
+    "vitest": "^2.1.5"
+  }
+}

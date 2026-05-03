@@ -1,24 +1,27 @@
 {
   "name": "repogotchi",
-  "private": true,
   "version": "0.0.0",
-  "type": "module",
+  "private": true,
+  "description": "A pet for every repo: GitHub README badge, local CLI, and macOS menubar companion driven by one shared contract.",
+  "license": "MIT",
+  "author": "schmug",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/schmug/RepoGotchi.git"
+  },
+  "homepage": "https://github.com/schmug/RepoGotchi",
+  "bugs": {
+    "url": "https://github.com/schmug/RepoGotchi/issues"
+  },
+  "packageManager": "pnpm@9.12.0",
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "lucide-react": "^0.555.0",
-    "@google/genai": "^1.30.0",
-    "react-dom": "^19.2.0",
-    "react": "^19.2.0",
-    "recharts": "^3.5.0"
-  },
-  "devDependencies": {
-    "@types/node": "^22.14.0",
-    "@vitejs/plugin-react": "^5.0.0",
-    "typescript": "~5.8.2",
-    "vite": "^6.2.0"
+    "build": "pnpm -r --if-present build",
+    "test": "pnpm -r --if-present test",
+    "typecheck": "pnpm -r --if-present typecheck",
+    "lint": "pnpm -r --if-present lint",
+    "codegen": "pnpm --filter @repogotchi/contract codegen"
   }
 }

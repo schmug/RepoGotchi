@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://repogotchi.app/schemas/v1/state.json",
+  "title": "State",
+  "description": "Live mood and score snapshot for a pet, recomputed from repo signals.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "petId",
+    "computedAt",
+    "scores",
+    "mood",
+    "level",
+    "evolutionStage",
+    "statusHeadline",
+    "signals",
+    "source"
+  ],
+  "properties": {
+    "schemaVersion": { "type": "integer", "enum": [1] },
+    "petId": { "type": "string", "pattern": "^[a-f0-9]{12}$" },
+    "computedAt": { "type": "string", "format": "date-time" },
+    "scores": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["health", "happiness", "energy", "cleanliness"],
+      "properties": {
+        "health": { "$ref": "#/$defs/score" },
+        "happiness": { "$ref": "#/$defs/score" },
+        "energy": { "$ref": "#/$defs/score" },
+        "cleanliness": { "$ref": "#/$defs/score" }
+      }
+    },
+    "mood": {
+      "type": "string",
+      "enum": ["happy", "sad", "sick", "angry", "sleepy", "excited", "ghost"]
+    },
+    "level": { "type": "integer", "minimum": 1 },
+    "evolutionStage": {
+      "type": "string",
+      "enum": ["egg", "hatchling", "juvenile", "adult", "elder", "ancient"]
+    },
+    "statusHeadline": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 120,
+      "description": "Short human-readable status, e.g. 'Drowning in lint errors'."
+    },
+    "signals": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Raw observations from the source. All optional; surfaces report what they can see.",
+      "properties": {
+        "lastCommitDaysAgo": { "type": "number", "minimum": 0 },
+        "openIssues": { "type": "integer", "minimum": 0 },
+        "openPullRequests": { "type": "integer", "minimum": 0 },
+        "contributors": { "type": "integer", "minimum": 0 },
+        "stars": { "type": "integer", "minimum": 0 },
+        "isArchived": { "type": "boolean" },
+        "ciStatus": {
+          "type": "string",
+          "enum": ["passing", "failing", "pending", "unknown"]
+        },
+        "hasUncommittedChanges": { "type": "boolean" },
+        "testStatus": {
+          "type": "string",
+          "enum": ["passing", "failing", "unknown"]
+        }
+      }
+    },
+    "source": {
+      "type": "string",
+      "enum": ["cli", "action", "worker", "manual"]
+    }
+  },
+  "$defs": {
+    "score": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 100
+    }
+  }
+}

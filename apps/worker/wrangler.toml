@@ -1,0 +1,10 @@
+name = "repogotchi-worker"
+main = "src/index.ts"
+compatibility_date = "2025-01-01"
+
+# Local dev:  pnpm --filter @repogotchi/worker dev
+# Deploy:     pnpm --filter @repogotchi/worker deploy   (requires `wrangler login`)
+#
+# For higher GitHub rate limits in dev, drop a fine-grained PAT into
+# .dev.vars (gitignored) as: GITHUB_TOKEN = "ghp_..."
+# In production, set it via: wrangler secret put GITHUB_TOKEN
