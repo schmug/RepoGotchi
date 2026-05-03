@@ -2,6 +2,17 @@ name = "repogotchi-worker"
 main = "src/index.ts"
 compatibility_date = "2025-01-01"
 
+# Always-on workers.dev fallback (repogotchi-worker.<account>.workers.dev).
+# Useful for smoke-testing a deploy before DNS propagates.
+workers_dev = true
+
+# Production hostname. Requires the cortech.online zone to live in the same
+# Cloudflare account that runs `wrangler deploy`. Cloudflare provisions DNS +
+# TLS automatically when `custom_domain = true`.
+[[routes]]
+pattern = "repogotchi.cortech.online"
+custom_domain = true
+
 # Local dev:  pnpm --filter @repogotchi/worker dev
 # Deploy:     pnpm --filter @repogotchi/worker deploy   (requires `wrangler login`)
 #

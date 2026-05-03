@@ -36,7 +36,7 @@ Test totals: **89 JS + 5 Swift = 94**.
 ### Soon — close the cross-surface gaps
 
 4. **Resolve the palette divergence between CLI and Worker** ([#2](https://github.com/schmug/RepoGotchi/issues/2)). Worker uses GitHub-detected language; CLI doesn't, so the same repo gets two different pets. Detect from file extensions in the CLI.
-5. **Deploy the Worker** ([#4](https://github.com/schmug/RepoGotchi/issues/4)) to a real hostname (e.g. `repogotchi.app`). Wrangler config + domain + DNS. One-time setup.
+5. **Deploy the Worker** ([#4](https://github.com/schmug/RepoGotchi/issues/4)) to `repogotchi.cortech.online`. Wrangler config landed; remaining work is `wrangler login` → `wrangler secret put GITHUB_TOKEN` → `wrangler deploy`, then swap the root README badge example to the live URL.
 
 ### Later — quality + delight
 
