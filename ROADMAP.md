@@ -30,20 +30,20 @@ Test totals: **89 JS + 5 Swift = 94**.
 ### Now — finish the v0 loop
 
 1. **Open the bootstrap PR.** The CI workflow only fires on PRs/pushes to main; nothing has run yet. Opening the PR validates the whole pipeline against real CI.
-2. **Land the Claude Code plugin** (issue: TBD). Small bash hooks; the only blocker is "what binary do they call?" — see #3.
-3. **Make the CLI installable as `repogotchi`** (issue: TBD). Needs an esbuild or tsup bundle to `dist/index.js`, a `bin` entry in `package.json`, and either npm publish or a Homebrew tap.
+2. **Make the CLI installable as `repogotchi`** ([#1](https://github.com/schmug/RepoGotchi/issues/1)). Needs an esbuild bundle to `dist/index.js`, a `bin` entry in `package.json`, and either npm publish or a Homebrew tap. Blocks #3.
+3. **Land the Claude Code plugin** ([#3](https://github.com/schmug/RepoGotchi/issues/3)). Small bash hooks calling `repogotchi compute`. Depends on #1.
 
 ### Soon — close the cross-surface gaps
 
-4. **Resolve the palette divergence between CLI and Worker** (issue: TBD). Worker uses GitHub-detected language; CLI doesn't, so the same repo gets two different pets. Options: a) CLI infers language from extensions, b) CLI calls `gh api` if available, c) document the Action flow as the canonical source.
-5. **Deploy the Worker** to a real hostname (e.g. `repogotchi.app`). Wrangler config + domain + DNS. One-time setup.
+4. **Resolve the palette divergence between CLI and Worker** ([#2](https://github.com/schmug/RepoGotchi/issues/2)). Worker uses GitHub-detected language; CLI doesn't, so the same repo gets two different pets. Detect from file extensions in the CLI.
+5. **Deploy the Worker** ([#4](https://github.com/schmug/RepoGotchi/issues/4)) to a real hostname (e.g. `repogotchi.app`). Wrangler config + domain + DNS. One-time setup.
 
 ### Later — quality + delight
 
-6. **macOS popover renders the actual SVG**, not just text + score bars. WKWebView loading `pet.svg` is the simplest path.
-7. **macOS companion packaging**: Homebrew tap + notarized `.app` build, `LSUIElement = true`.
-8. **Premium pet tier**: optional LLM-driven personality + Imagen visualPrompt for a richer pet on the web. Out of scope for the procedural SVG.
-9. **Animated spritesheet support** (per the [openai/skills hatch-pet contract](https://github.com/openai/skills/tree/main/skills/.curated/hatch-pet)) — 8×9 atlas, 192×208 cells. Optional second tier next to procedural SVG.
+6. **macOS popover renders the actual SVG** ([#5](https://github.com/schmug/RepoGotchi/issues/5)), not just text + score bars. WKWebView loading `pet.svg`.
+7. **macOS companion packaging** (no issue yet): Homebrew tap + notarized `.app` build, `LSUIElement = true`.
+8. **Premium pet tier** (no issue yet): optional LLM-driven personality + Imagen visualPrompt for a richer pet on the web.
+9. **Animated spritesheet support** (no issue yet, per the [openai/skills hatch-pet contract](https://github.com/openai/skills/tree/main/skills/.curated/hatch-pet)) — 8×9 atlas, 192×208 cells. Optional tier next to procedural SVG.
 
 ### Open product/design decisions
 
