@@ -1,20 +1,20 @@
 {
   "schemaVersion": 1,
   "petId": "653c0b44fa4d",
-  "computedAt": "2026-05-03T14:25:00.329Z",
+  "computedAt": "2026-05-03T14:53:10.038Z",
   "scores": {
     "health": 70,
-    "happiness": 60,
+    "happiness": 45,
     "energy": 95,
     "cleanliness": 70
   },
-  "mood": "happy",
+  "mood": "sleepy",
   "level": 1,
   "evolutionStage": "egg",
-  "statusHeadline": "Healthy and active",
+  "statusHeadline": "Catching its breath",
   "signals": {
     "lastCommitDaysAgo": 0,
-    "openIssues": 5,
+    "openIssues": 6,
     "stars": 1,
     "isArchived": false
   },
