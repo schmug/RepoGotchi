@@ -57,26 +57,29 @@ export interface PetVariation {
 export function derivePetVariation(pet: Pet): PetVariation;
 ```
 
-Reads bytes 1–5 of `pet.id` (byte 0 is reserved for the existing name index).
-Sync. No I/O. Identical inputs → identical outputs. Lives in core (not
-render-svg) so the variation is part of identity logic, available to
+Reads bytes 2–5 of `pet.id` (bytes 0–1 are reserved for the existing name
+index, which reads them as a 16-bit big-endian int via `parseInt(id.slice(0,
+4), 16)`). Sync. No I/O. Identical inputs → identical outputs. Lives in core
+(not render-svg) so the variation is part of identity logic, available to
 non-renderer consumers and forward-compatible if we ever persist it on
 `pet.json`.
 
 Byte-to-dimension allocation, documented in the module:
 
-| Byte | Dimension     | `byte % N` |
-|------|---------------|------------|
-| 0    | name index    | (existing) |
-| 1    | silhouette    | 4          |
-| 2    | earKind       | 6          |
-| 3    | eyeKind       | 4          |
-| 4    | cheekKind     | 3          |
-| 5    | trinket       | 6          |
+| Source            | Dimension     | `n % N` |
+|-------------------|---------------|---------|
+| bytes 0–1 (u16)   | name index    | (existing) |
+| byte 2            | silhouette    | 4       |
+| byte 3            | earKind       | 6       |
+| byte 4            | eyeKind       | 4       |
+| byte 5 high nibble| cheekKind     | 3       |
+| byte 5 low nibble | trinket       | 6       |
 
-If a future dimension exceeds the available 6 bytes, hash `pet.id` again with
-a different prefix string and read from that hash. Documented in the module
-header so contributors do not silently reuse byte indexes.
+Splitting byte 5 into two nibbles keeps everything inside `pet.id`'s 6 bytes
+without adding async hashing or correlation across dimensions. If a future
+dimension exhausts the available bits, hash `pet.id` again with a different
+prefix string and read from that hash — documented in the module header so
+contributors do not silently reuse bit ranges.
 
 Math: 4 × 6 × 4 × 3 × 6 = **1,728 distinct base looks** before palette and
 mood. Across the GitHub repo space, collisions feel rare.
