@@ -107,4 +107,71 @@ describe("handle", () => {
     ).text();
     expect(a).toBe(b);
   });
+
+  it("accepts ?size=44 and renders at that size", async () => {
+    const fetcher = vi.fn<typeof fetch>().mockResolvedValue(ok(REPO));
+    const res = await handle(
+      new Request("https://r/pet/schmug/RepoGotchi.svg?size=44"),
+      {},
+      { fetcher, now: NOW },
+    );
+    expect(res.status).toBe(200);
+    const body = await res.text();
+    expect(body).toContain('width="44"');
+    expect(body).toContain('height="44"');
+  });
+
+  it("accepts ?theme=dark and applies dark mode without media query", async () => {
+    const fetcher = vi.fn<typeof fetch>().mockResolvedValue(ok(REPO));
+    const res = await handle(
+      new Request("https://r/pet/schmug/RepoGotchi.svg?theme=dark"),
+      {},
+      { fetcher, now: NOW },
+    );
+    const body = await res.text();
+    expect(body).toContain("--outline: #E8E8E8");
+    expect(body).not.toContain("prefers-color-scheme");
+  });
+
+  it("accepts ?detail=compact and tightens the viewBox", async () => {
+    const fetcher = vi.fn<typeof fetch>().mockResolvedValue(ok(REPO));
+    const res = await handle(
+      new Request("https://r/pet/schmug/RepoGotchi.svg?detail=compact"),
+      {},
+      { fetcher, now: NOW },
+    );
+    const body = await res.text();
+    expect(body).toContain('viewBox="40 40 320 320"');
+  });
+
+  it("silently ignores garbage query values", async () => {
+    const fetcher = vi.fn<typeof fetch>().mockResolvedValue(ok(REPO));
+    const res = await handle(
+      new Request(
+        "https://r/pet/schmug/RepoGotchi.svg?size=abc&theme=blue&detail=enormous",
+      ),
+      {},
+      { fetcher, now: NOW },
+    );
+    expect(res.status).toBe(200);
+    const body = await res.text();
+    expect(body).toContain('viewBox="0 0 400 400"');
+    expect(body).toContain("@media (prefers-color-scheme: dark)");
+  });
+
+  it("clamps size to a sane range", async () => {
+    const fetcher = vi.fn<typeof fetch>().mockResolvedValue(ok(REPO));
+    const tooSmall = await handle(
+      new Request("https://r/pet/schmug/RepoGotchi.svg?size=1"),
+      {},
+      { fetcher, now: NOW },
+    );
+    const tooBig = await handle(
+      new Request("https://r/pet/schmug/RepoGotchi.svg?size=9999"),
+      {},
+      { fetcher, now: NOW },
+    );
+    expect(await tooSmall.text()).toContain('width="400"');
+    expect(await tooBig.text()).toContain('width="400"');
+  });
 });

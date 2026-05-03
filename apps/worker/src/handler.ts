@@ -1,5 +1,6 @@
 import { composeState, hatchPet } from "@repogotchi/core";
 import { renderPet } from "@repogotchi/render-svg";
+import type { RenderOptions } from "@repogotchi/render-svg";
 import type { Env } from "./env";
 import { errorSvg } from "./errorSvg";
 import { fetchRepo, GitHubError, repoToSignals } from "./github";
@@ -55,7 +56,8 @@ export async function handle(
       ...(now ? { computedAt: now.toISOString() } : {}),
     });
 
-    const { svg } = renderPet(pet, state);
+    const renderOpts = parseRenderOpts(url.searchParams);
+    const { svg } = renderPet(pet, state, renderOpts);
     return svgResponse(svg, 200);
   } catch (err) {
     if (err instanceof GitHubError && err.status === 403) {
@@ -76,4 +78,28 @@ function svgResponse(svg: string, status: number): Response {
           : "public, max-age=60",
     },
   });
+}
+
+function parseRenderOpts(params: URLSearchParams): RenderOptions {
+  const opts: RenderOptions = {};
+
+  const sizeRaw = params.get("size");
+  if (sizeRaw !== null) {
+    const size = parseInt(sizeRaw, 10);
+    if (Number.isFinite(size) && size >= 16 && size <= 2048) {
+      opts.size = size;
+    }
+  }
+
+  const theme = params.get("theme");
+  if (theme === "auto" || theme === "light" || theme === "dark") {
+    opts.theme = theme;
+  }
+
+  const detail = params.get("detail");
+  if (detail === "auto" || detail === "full" || detail === "compact") {
+    opts.detail = detail;
+  }
+
+  return opts;
 }
