@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { derivePetVariation } from "@repogotchi/core";
 import { pickAccessories, renderPet } from "../src/index";
 import { PET, makeState } from "./fixtures";
 
@@ -104,6 +105,58 @@ describe("pickAccessories", () => {
         makeState({ signals: { lastCommitDaysAgo: 90 } }),
       ).zzz,
     ).toBe(true);
+  });
+});
+
+describe("variation", () => {
+  it("renders different bodies for different silhouette pet ids", () => {
+    const round = renderPet({ ...PET, id: "000000000000" }, makeState()).svg;
+    const teardrop = renderPet({ ...PET, id: "000001000000" }, makeState()).svg;
+    const oval = renderPet({ ...PET, id: "000002000000" }, makeState()).svg;
+    const lumpy = renderPet({ ...PET, id: "000003000000" }, makeState()).svg;
+    expect(new Set([round, teardrop, oval, lumpy]).size).toBe(4);
+  });
+
+  it("ear kind 'none' emits an antenna instead of side ears", () => {
+    const id = "000000040000"; // earKind = none
+    const v = derivePetVariation({ ...PET, id });
+    expect(v.earKind).toBe("none");
+    const { svg } = renderPet({ ...PET, id }, makeState());
+    expect(svg).not.toMatch(/cx="140"\s+cy="120"/); // no left side ear
+    expect(svg).not.toMatch(/cx="260"\s+cy="120"/); // no right side ear
+  });
+
+  it("mood-overridden eyes ignore eyeKind", () => {
+    // pick an id with eyeKind = wide (byte 4 = 3)
+    const id = "000000000300";
+    expect(derivePetVariation({ ...PET, id }).eyeKind).toBe("wide");
+
+    const sadSvg = renderPet({ ...PET, id }, makeState({ mood: "sad" })).svg;
+    // Wide eyes use white-filled ellipses; mood-sad eyes do not.
+    expect(sadSvg).not.toContain('fill="white" stroke="');
+    // Tears (sad mood) must still appear.
+    expect(sadSvg).toContain("#5BA8FF");
+  });
+
+  it("cheeks 'none' produces no blush ovals", () => {
+    const id = "000000000020"; // cheekKind = none
+    expect(derivePetVariation({ ...PET, id }).cheekKind).toBe("none");
+    const { svg } = renderPet({ ...PET, id }, makeState());
+    expect(svg).not.toContain("#FFB6C1");
+  });
+
+  it("renders selected trinket aria-labels", () => {
+    const trinketIds: Record<string, string> = {
+      collar: "000000000000",
+      bowtie: "000000000001",
+      "belly-patch": "000000000002",
+      "tail-tuft": "000000000003",
+      "whisker-3": "000000000004",
+    };
+    for (const [label, id] of Object.entries(trinketIds)) {
+      const { svg } = renderPet({ ...PET, id }, makeState());
+      expect(svg).toContain(`aria-label="${label}"`);
+    }
   });
 });
 

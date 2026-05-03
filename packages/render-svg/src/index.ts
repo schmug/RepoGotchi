@@ -1,8 +1,13 @@
 import type { Pet, State } from "@repogotchi/contract";
-import { escapeXmlAttr, escapeXmlText } from "./xml";
+import { derivePetVariation } from "@repogotchi/core";
+import { renderAccessories } from "./parts/accessories";
+import { renderBody } from "./parts/body";
+import { renderCheeks } from "./parts/cheeks";
+import { renderEars } from "./parts/ears";
 import { renderEyes } from "./parts/eyes";
 import { renderMouth } from "./parts/mouth";
-import { pickAccessories, renderAccessories } from "./parts/accessories";
+import { renderTrinket } from "./parts/trinket";
+import { escapeXmlAttr, escapeXmlText } from "./xml";
 
 export interface RenderOptions {
   /** Output width/height in px. Always renders into a 400x400 viewBox. Default 400. */
@@ -25,20 +30,22 @@ export function renderPet(
   const size = opts.size ?? 400;
   const bg = opts.background ?? "transparent";
 
+  const variation = derivePetVariation(pet);
   const { primary, secondary, outline } = pet.palette;
 
   const isGhost = state.mood === "ghost" || state.signals.isArchived === true;
   const groupOpacity = isGhost ? 0.55 : 1;
 
-  // Body radius scales with health on the 0–100 axis (80 → 120).
-  const cx = 200;
-  const cy = 180;
-  const bodyRadius = 80 + (clamp(state.scores.health, 0, 100) / 100) * 40;
+  const radius = 80 + (clamp(state.scores.health, 0, 100) / 100) * 40;
 
   const gradId = `body-${pet.id}`;
   const ariaLabel = `${pet.name}: ${state.statusHeadline} (${state.mood}, level ${state.level})`;
 
-  const eyes = renderEyes(state.mood, outline);
+  const body = renderBody(variation.silhouette, radius, `url(#${gradId})`, outline);
+  const ears = renderEars(variation.earKind, pet);
+  const cheeks = renderCheeks(variation.cheekKind, pet);
+  const trinket = renderTrinket(variation.trinket, pet);
+  const eyes = renderEyes(state.mood, variation.eyeKind, outline);
   const mouth = renderMouth(state.mood, state.scores.happiness, outline);
   const accessories = renderAccessories(pet, state);
 
@@ -54,12 +61,12 @@ export function renderPet(
   </defs>
   <rect width="400" height="400" fill="${bg}"/>
   <g opacity="${groupOpacity}">
-    <ellipse cx="${cx - 60}" cy="120" rx="25" ry="35" fill="${primary}" stroke="${outline}" stroke-width="2"/>
-    <ellipse cx="${cx + 60}" cy="120" rx="25" ry="35" fill="${primary}" stroke="${outline}" stroke-width="2"/>
-    <ellipse cx="${cx}" cy="${cy}" rx="${n(bodyRadius)}" ry="${n(bodyRadius * 1.1)}" fill="url(#${gradId})" stroke="${outline}" stroke-width="3"/>
-    <ellipse cx="${cx - 80}" cy="${cy + 10}" rx="14" ry="9" fill="#FFB6C1" opacity="0.55"/>
-    <ellipse cx="${cx + 80}" cy="${cy + 10}" rx="14" ry="9" fill="#FFB6C1" opacity="0.55"/>${eyes}
-    ${mouth}${accessories}
+    ${body}
+    ${cheeks}
+    ${eyes}
+    ${mouth}
+    ${trinket}
+    ${ears}${accessories}
   </g>
 </svg>`;
 
@@ -68,10 +75,6 @@ export function renderPet(
 
 function clamp(value: number, min: number, max: number): number {
   return Math.max(min, Math.min(max, value));
-}
-
-function n(x: number): string {
-  return Number(x.toFixed(2)).toString();
 }
 
 export { pickAccessories } from "./parts/accessories";

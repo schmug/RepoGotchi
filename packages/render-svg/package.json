@@ -17,7 +17,8 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@repogotchi/contract": "workspace:*"
+    "@repogotchi/contract": "workspace:*",
+    "@repogotchi/core": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^22.10.0",
