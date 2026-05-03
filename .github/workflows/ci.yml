@@ -35,12 +35,12 @@ jobs:
       - name: Test
         run: pnpm test
 
-      - name: Verify generated/ is in sync with schemas
+      - name: Verify codegen output is in sync with schemas
         run: |
           pnpm --filter @repogotchi/contract codegen
-          if ! git diff --quiet packages/contract/generated; then
+          if ! git diff --quiet packages/contract/generated packages/contract/swift/Sources; then
             echo "::error::Generated files are out of sync with schemas. Run: pnpm --filter @repogotchi/contract codegen"
-            git --no-pager diff packages/contract/generated
+            git --no-pager diff packages/contract/generated packages/contract/swift/Sources
             exit 1
           fi
 
@@ -52,3 +52,18 @@ jobs:
             git --no-pager diff --stat actions/repogotchi/dist
             exit 1
           fi
+
+  swift:
+    name: Swift macOS build + test
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build RepoGotchiContract package
+        run: swift build --package-path packages/contract/swift
+
+      - name: Build companion app
+        run: swift build --package-path apps/macos-companion
+
+      - name: Test companion core
+        run: swift test --package-path apps/macos-companion
