@@ -216,8 +216,18 @@ describe("detail", () => {
   });
 
   it("compact drops sparkles, zzz, glasses, cheeks, and trinket", () => {
+    // Sanity-check that the test pet would emit a bowtie trinket in full mode
+    // — otherwise the not.toContain check below is vacuous.
+    const bowtieId = "000000000001";
+    const fullSvg = renderPet(
+      { ...PET, id: bowtieId, traits: ["popular", "scholarly", "active"] },
+      makeState({ mood: "sleepy", signals: { lastCommitDaysAgo: 60 } }),
+      { detail: "full" },
+    ).svg;
+    expect(fullSvg).toContain('aria-label="bowtie"');
+
     const { svg } = renderPet(
-      { ...PET, traits: ["popular", "scholarly", "active"] },
+      { ...PET, id: bowtieId, traits: ["popular", "scholarly", "active"] },
       makeState({ mood: "sleepy", signals: { lastCommitDaysAgo: 60 } }),
       { detail: "compact" },
     );
@@ -225,7 +235,6 @@ describe("detail", () => {
     expect(svg).not.toContain('aria-label="zzz"');
     expect(svg).not.toContain('aria-label="glasses"');
     expect(svg).not.toContain('aria-label="bowtie"');
-    expect(svg).not.toContain('aria-label="collar"');
     expect(svg).not.toContain("var(--blush)"); // no blush ovals
     // Crown remains, simplified.
     expect(svg).toContain('aria-label="crown"');
