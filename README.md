@@ -1,5 +1,17 @@
 # RepoGotchi
 
+<p align="center">
+  <a href=".repogotchi/pet.svg" title="Action embed — committed by the workflow">
+    <img src=".repogotchi/pet.svg" alt="RepoGotchi pet (Action embed)" width="200" />
+  </a>
+  &nbsp;&nbsp;
+  <a href="https://repogotchi.cortech.online/pet/schmug/RepoGotchi.svg" title="Worker embed — live, edge-cached">
+    <img src="https://repogotchi.cortech.online/pet/schmug/RepoGotchi.svg" alt="RepoGotchi pet (Worker embed)" width="200" />
+  </a>
+</p>
+
+<p align="center"><sub>Left: <code>.repogotchi/pet.svg</code> (Action). Right: <code>repogotchi.cortech.online</code> (Worker). Both rendered from this repo's signals.</sub></p>
+
 A pet for every repo. One shared contract — `pet.json` (identity) + `state.json` (live) — drives three surfaces:
 
 - **GitHub Action** — runs in CI, commits `.repogotchi/pet.svg` back to the repo. Works offline and inside CI; updates only when the workflow runs. Embed it in your README:
