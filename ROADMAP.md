@@ -13,7 +13,7 @@ Last updated: 2026-05-03 (commit `39d1198`).
 | `@repogotchi/contract`     | shipped  | JSON Schemas + TS/Swift codegen, drift-checked in CI. 6 tests.                   |
 | `@repogotchi/core`         | shipped  | Scoring, mood, level/evolution, headline, hatchPet, petIdFor. 30 tests.          |
 | `@repogotchi/render-svg`   | shipped  | Procedural SVG, deterministic, runs in browser/Node/Workers. 17 tests.           |
-| `@repogotchi/worker`       | shipped  | Cloudflare Worker `/pet/:owner/:repo.svg`. 14 tests. Not deployed.               |
+| `@repogotchi/worker`       | shipped  | Cloudflare Worker `/pet/:owner/:repo.svg`. 14 tests. Deployed at `repogotchi.cortech.online`. |
 | `@repogotchi/cli`          | shipped  | `init` / `compute` / `render` / `status`. 20 tests. Not published to npm.        |
 | `@repogotchi/action`       | shipped  | GitHub Action with bundled `dist/`. 2 tests. Dogfooded via the workflow below.   |
 | `apps/macos-companion`     | shipped  | Swift menubar app + companion core lib. 5 tests. Not packaged/notarized.         |
@@ -36,7 +36,7 @@ Test totals: **89 JS + 5 Swift = 94**.
 ### Soon — close the cross-surface gaps
 
 4. **Resolve the palette divergence between CLI and Worker** ([#2](https://github.com/schmug/RepoGotchi/issues/2)). Worker uses GitHub-detected language; CLI doesn't, so the same repo gets two different pets. Detect from file extensions in the CLI.
-5. **Deploy the Worker** ([#4](https://github.com/schmug/RepoGotchi/issues/4)) to `repogotchi.cortech.online`. Wrangler config landed; remaining work is `wrangler login` → `wrangler secret put GITHUB_TOKEN` → `wrangler deploy`, then swap the root README badge example to the live URL.
+5. ~~**Deploy the Worker** ([#4](https://github.com/schmug/RepoGotchi/issues/4)) to `repogotchi.cortech.online`.~~ Shipped 2026-05-03; `GET /pet/:owner/:repo.svg` is live with `GITHUB_TOKEN` set.
 
 ### Later — quality + delight
 

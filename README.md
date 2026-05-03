@@ -2,11 +2,14 @@
 
 A pet for every repo. One shared contract — `pet.json` (identity) + `state.json` (live) — drives three surfaces:
 
-- **GitHub Action** — runs in CI, commits `.repogotchi/pet.svg` back to the repo. Embed it in your README:
+- **GitHub Action** — runs in CI, commits `.repogotchi/pet.svg` back to the repo. Works offline and inside CI; updates only when the workflow runs. Embed it in your README:
   ```markdown
   ![pet](.repogotchi/pet.svg)
   ```
-- **Cloudflare Worker** — `GET /pet/:owner/:repo.svg`. Live, cached, zero-storage.
+- **Cloudflare Worker** — `GET /pet/:owner/:repo.svg`. Live, edge-cached, zero-storage; reflects the repo's current state without committing anything. Embed it in your README:
+  ```markdown
+  ![pet](https://repogotchi.cortech.online/pet/<owner>/<repo>.svg)
+  ```
 - **Local CLI** — `repogotchi` reads your working repo's git signals and writes pet/state files under `~/.repogotchi/`.
 - **macOS menubar companion** — Swift app that watches `~/.repogotchi/` and reflects the active repo's pet in your menubar.
 
