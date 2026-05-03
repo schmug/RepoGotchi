@@ -1040,11 +1040,12 @@ describe("variation", () => {
 
 ### - [ ] Step 3.8: Re-snapshot
 
-The canonical `PET` fixture (`id: a3f5b8c2d1e0`) reads variation bytes:
-- byte 2 = 0xf5, % 4 = 1 → silhouette `teardrop`
-- byte 3 = 0xb8, % 6 = 2 → earKind `floppy-2`
-- byte 4 = 0xc2, % 4 = 2 → eyeKind `bead`
-- byte 5 = 0xd1, hi=0xd %3=1 → cheek `freckles`, lo=0x1 → trinket `bowtie`
+The canonical `PET` fixture (`id: a3f5b8c2d1e0`) reads variation bytes
+(byte-pairs are `a3 | f5 | b8 | c2 | d1 | e0`):
+- byte 2 = 0xb8 (184), % 4 = 0 → silhouette `round`
+- byte 3 = 0xc2 (194), % 6 = 2 → earKind `floppy-2`
+- byte 4 = 0xd1 (209), % 4 = 1 → eyeKind `almond`
+- byte 5 = 0xe0, hi=0xe (14) %3 = 2 → cheek `none`, lo=0x0 → trinket `collar`
 
 So the existing snapshot will diff. Update it:
 
@@ -1052,7 +1053,7 @@ So the existing snapshot will diff. Update it:
 pnpm --filter @repogotchi/render-svg test -- -u
 ```
 
-Verify the diff manually: open `packages/render-svg/test/__snapshots__/render.test.ts.snap` and confirm the canonical pet now has a teardrop silhouette path, floppy ears, bead eyes, freckles, and a bowtie. Reject and revisit if any of those are missing.
+Verify the diff manually: open `packages/render-svg/test/__snapshots__/render.test.ts.snap` and confirm the canonical pet now has a round body ellipse, floppy ear paths (Q-curve, not simple ellipses), almond eyes (ellipses with center pupils), no blush/freckles, and a `<g aria-label="collar">`. Reject and revisit if any of those are missing.
 
 ### - [ ] Step 3.9: Run full tests + typecheck
 
@@ -1845,7 +1846,7 @@ Multi-species (the bigger swing) is tracked separately in #13. The renderer's pa
 
 ## What changes visually
 
-- The dogfood pet for this repo (`a3f5b8c2d1e0`) shifts from a round blob with pointed ears and round eyes → teardrop silhouette, floppy ears, bead eyes, freckles, bowtie. One-time refresh per dogfooding repo.
+- The dogfood pet for this repo (`a3f5b8c2d1e0`) shifts from a round blob with pointed ears and round eyes → round body, floppy ears, almond eyes, no cheeks, collar. One-time refresh per dogfooding repo.
 - README badges now respond to GitHub's dark-mode toggle.
 - Menubar 44px renders cleanly without gluing fine details into mud.
 
