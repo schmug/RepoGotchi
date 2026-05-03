@@ -25,6 +25,8 @@ export { petIdFor } from "./petId";
 export type { RepoRef } from "./petId";
 export { hatchPet } from "./hatch";
 export type { HatchInput } from "./hatch";
+export { derivePetVariation } from "./variation";
+export type { PetVariation } from "./variation";
 
 export interface ComposeStateInput {
   pet: Pet;

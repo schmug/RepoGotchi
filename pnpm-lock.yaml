@@ -149,6 +149,9 @@ importers:
       '@repogotchi/contract':
         specifier: workspace:*
         version: link:../contract
+      '@repogotchi/core':
+        specifier: workspace:*
+        version: link:../core
     devDependencies:
       '@types/node':
         specifier: ^22.10.0

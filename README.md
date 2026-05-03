@@ -27,6 +27,18 @@ A pet for every repo. One shared contract — `pet.json` (identity) + `state.jso
 
 The pet's identity (species, palette, name) is deterministic from the repo. The mood and accessories change with the signals.
 
+### Theming and detail
+
+Pets adapt to light/dark backgrounds via `prefers-color-scheme` and gracefully shed detail at small sizes. The Worker endpoint accepts query params:
+
+```
+?size=44&theme=dark&detail=compact   # menubar-sized dark embed
+?theme=light                         # force the light palette
+?detail=full                         # force full detail at any size
+```
+
+Both `theme` and `detail` default to `auto`. Auto theme emits a `prefers-color-scheme: dark` media query so a single SVG file looks right on both light and dark GitHub READMEs out of the box. Auto detail resolves to `compact` when `size <= 64` (e.g. menubar 22–44px), `full` otherwise.
+
 ## Quickstart
 
 ### As a GitHub Action

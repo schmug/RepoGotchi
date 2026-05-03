@@ -1113,9 +1113,9 @@ var require_util = __commonJS({
       const ret = [];
       let hasContentLength = false;
       let contentDispositionIdx = -1;
-      for (let n2 = 0; n2 < headers.length; n2 += 2) {
-        const key = headers[n2 + 0].toString();
-        const val = headers[n2 + 1].toString("utf8");
+      for (let n = 0; n < headers.length; n += 2) {
+        const key = headers[n + 0].toString();
+        const val = headers[n + 1].toString("utf8");
         if (key.length === 14 && (key === "content-length" || key.toLowerCase() === "content-length")) {
           ret.push(key, val);
           hasContentLength = true;
@@ -1539,7 +1539,7 @@ var require_PartStream = __commonJS({
       ReadableStream.call(this, opts);
     }
     inherits(PartStream, ReadableStream);
-    PartStream.prototype._read = function(n2) {
+    PartStream.prototype._read = function(n) {
     };
     module2.exports = PartStream;
   }
@@ -1826,7 +1826,7 @@ var require_Dicer = __commonJS({
       }
       if (!this._part) {
         this._part = new PartStream(this._partOpts);
-        this._part._read = function(n2) {
+        this._part._read = function(n) {
           self._unpause();
         };
         if (this._isPreamble && this.listenerCount("preamble") !== 0) {
@@ -2795,7 +2795,7 @@ var require_multipart = __commonJS({
                 cb();
               }
             });
-            file._read = function(n2) {
+            file._read = function(n) {
               if (!self._pause) {
                 return;
               }
@@ -2904,7 +2904,7 @@ var require_multipart = __commonJS({
       this.truncated = false;
     }
     inherits(FileStream, Readable);
-    FileStream.prototype._read = function(n2) {
+    FileStream.prototype._read = function(n) {
     };
     module2.exports = Multipart;
   }
@@ -4375,9 +4375,9 @@ var require_webidl = __commonJS({
       }
       return x;
     };
-    webidl.util.IntegerPart = function(n2) {
-      const r = Math.floor(Math.abs(n2));
-      if (n2 < 0) {
+    webidl.util.IntegerPart = function(n) {
+      const r = Math.floor(Math.abs(n));
+      if (n < 0) {
         return -1 * r;
       }
       return r;
@@ -4920,7 +4920,7 @@ var require_file = __commonJS({
         fileBits = webidl.converters["sequence<BlobPart>"](fileBits);
         fileName = webidl.converters.USVString(fileName);
         options = webidl.converters.FilePropertyBag(options);
-        const n2 = fileName;
+        const n = fileName;
         let t = options.type;
         let d;
         substep: {
@@ -4936,7 +4936,7 @@ var require_file = __commonJS({
         }
         super(processBlobParts(fileBits, options), { type: t });
         this[kState] = {
-          name: n2,
+          name: n,
           lastModified: d,
           type: t
         };
@@ -4956,12 +4956,12 @@ var require_file = __commonJS({
     };
     var FileLike = class _FileLike {
       constructor(blobLike, fileName, options = {}) {
-        const n2 = fileName;
+        const n = fileName;
         const t = options.type;
         const d = options.lastModified ?? Date.now();
         this[kState] = {
           blobLike,
-          name: n2,
+          name: n,
           type: t,
           lastModified: d
         };
@@ -13874,9 +13874,9 @@ var require_fetch = __commonJS({
               let location = "";
               const headers = new Headers();
               if (Array.isArray(headersList)) {
-                for (let n2 = 0; n2 < headersList.length; n2 += 2) {
-                  const key = headersList[n2 + 0].toString("latin1");
-                  const val = headersList[n2 + 1].toString("latin1");
+                for (let n = 0; n < headersList.length; n += 2) {
+                  const key = headersList[n + 0].toString("latin1");
+                  const val = headersList[n + 1].toString("latin1");
                   if (key.toLowerCase() === "content-encoding") {
                     codings = val.toLowerCase().split(",").map((x) => x.trim());
                   } else if (key.toLowerCase() === "location") {
@@ -13958,9 +13958,9 @@ var require_fetch = __commonJS({
                 return;
               }
               const headers = new Headers();
-              for (let n2 = 0; n2 < headersList.length; n2 += 2) {
-                const key = headersList[n2 + 0].toString("latin1");
-                const val = headersList[n2 + 1].toString("latin1");
+              for (let n = 0; n < headersList.length; n += 2) {
+                const key = headersList[n + 0].toString("latin1");
+                const val = headersList[n + 1].toString("latin1");
                 headers[kHeadersList].append(key, val);
               }
               resolve({
@@ -16675,34 +16675,34 @@ var require_receiver = __commonJS({
        * @param {number} n
        * @returns {Buffer|null}
        */
-      consume(n2) {
-        if (n2 > this.#byteOffset) {
+      consume(n) {
+        if (n > this.#byteOffset) {
           return null;
-        } else if (n2 === 0) {
+        } else if (n === 0) {
           return emptyBuffer;
         }
-        if (this.#buffers[0].length === n2) {
+        if (this.#buffers[0].length === n) {
           this.#byteOffset -= this.#buffers[0].length;
           return this.#buffers.shift();
         }
-        const buffer = Buffer.allocUnsafe(n2);
+        const buffer = Buffer.allocUnsafe(n);
         let offset = 0;
-        while (offset !== n2) {
+        while (offset !== n) {
           const next = this.#buffers[0];
           const { length } = next;
-          if (length + offset === n2) {
+          if (length + offset === n) {
             buffer.set(this.#buffers.shift(), offset);
             break;
-          } else if (length + offset > n2) {
-            buffer.set(next.subarray(0, n2 - offset), offset);
-            this.#buffers[0] = next.subarray(n2 - offset);
+          } else if (length + offset > n) {
+            buffer.set(next.subarray(0, n - offset), offset);
+            this.#buffers[0] = next.subarray(n - offset);
             break;
           } else {
             buffer.set(this.#buffers.shift(), offset);
             offset += next.length;
           }
         }
-        this.#byteOffset -= n2;
+        this.#byteOffset -= n;
         return buffer;
       }
       parseCloseBody(onlyCode, data) {
@@ -18980,12 +18980,12 @@ var require_toolrunner = __commonJS({
       _processLineBuffer(data, strBuffer, onLine) {
         try {
           let s = strBuffer + data.toString();
-          let n2 = s.indexOf(os.EOL);
-          while (n2 > -1) {
-            const line = s.substring(0, n2);
+          let n = s.indexOf(os.EOL);
+          while (n > -1) {
+            const line = s.substring(0, n);
             onLine(line);
-            s = s.substring(n2 + os.EOL.length);
-            n2 = s.indexOf(os.EOL);
+            s = s.substring(n + os.EOL.length);
+            n = s.indexOf(os.EOL);
           }
           return s;
         } catch (err) {
@@ -23988,8 +23988,8 @@ function deriveHeadline(scores, signals, mood) {
       return (signals.lastCommitDaysAgo ?? 0) > 30 ? "Idle for weeks" : "Catching its breath";
   }
 }
-function clamp(n2) {
-  return Math.max(0, Math.min(100, Math.round(n2)));
+function clamp(n) {
+  return Math.max(0, Math.min(100, Math.round(n)));
 }
 
 // ../../packages/core/src/petId.ts
@@ -24097,6 +24097,62 @@ function darkenHex(hex, factor) {
   return "#" + [dim(r), dim(g), dim(b)].map((c) => c.toString(16).padStart(2, "0")).join("").toUpperCase();
 }
 
+// ../../packages/core/src/variation.ts
+var SILHOUETTES = [
+  "round",
+  "teardrop",
+  "oval-wide",
+  "lumpy"
+];
+var EAR_KINDS = [
+  "pointed-2",
+  "round-2",
+  "floppy-2",
+  "tuft-3",
+  "none",
+  "horn-2"
+];
+var EYE_KINDS = [
+  "round",
+  "almond",
+  "bead",
+  "wide"
+];
+var CHEEK_KINDS = [
+  "blush-pink",
+  "freckles",
+  "none"
+];
+var TRINKETS = [
+  "collar",
+  "bowtie",
+  "belly-patch",
+  "tail-tuft",
+  "whisker-3",
+  "none"
+];
+function derivePetVariation(pet) {
+  const b2 = readByte(pet.id, 2);
+  const b3 = readByte(pet.id, 3);
+  const b4 = readByte(pet.id, 4);
+  const b5 = readByte(pet.id, 5);
+  const b5hi = b5 >> 4 & 15;
+  const b5lo = b5 & 15;
+  return {
+    silhouette: SILHOUETTES[b2 % SILHOUETTES.length],
+    earKind: EAR_KINDS[b3 % EAR_KINDS.length],
+    eyeKind: EYE_KINDS[b4 % EYE_KINDS.length],
+    cheekKind: CHEEK_KINDS[b5hi % CHEEK_KINDS.length],
+    trinket: TRINKETS[b5lo % TRINKETS.length]
+  };
+}
+function readByte(hex, index) {
+  const start = index * 2;
+  const slice = hex.slice(start, start + 2);
+  const n = parseInt(slice, 16);
+  return Number.isFinite(n) ? n : 0;
+}
+
 // ../../packages/core/src/index.ts
 function composeState(input) {
   const scores = computeScores(input.signals);
@@ -24118,39 +24174,21 @@ function composeState(input) {
   };
 }
 
-// ../../packages/render-svg/src/parts.ts
-function escapeXmlText(s) {
-  return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-}
-function escapeXmlAttr(s) {
-  return escapeXmlText(s).replace(/"/g, "&quot;").replace(/'/g, "&apos;");
-}
+// ../../packages/render-svg/src/parts/eyes.ts
 var FACE_CX = 200;
 var EYE_Y = 160;
 var EYE_OFFSET = 50;
-var MOUTH_Y = 220;
-function renderEyes(mood, outline) {
+function renderEyes(mood, eyeKind, outline) {
   const lx = FACE_CX - EYE_OFFSET;
   const rx = FACE_CX + EYE_OFFSET;
   const stroke = `stroke="${outline}" stroke-width="3" fill="none"`;
-  const fill = `fill="${outline}"`;
   switch (mood) {
-    case "happy":
-      return `
-    <path d="M ${lx - 10} ${EYE_Y} Q ${lx} ${EYE_Y - 10} ${lx + 10} ${EYE_Y}" ${stroke}/>
-    <path d="M ${rx - 10} ${EYE_Y} Q ${rx} ${EYE_Y - 10} ${rx + 10} ${EYE_Y}" ${stroke}/>`;
-    case "excited":
-      return `
-    <circle cx="${lx}" cy="${EYE_Y}" r="9" ${fill}/>
-    <circle cx="${rx}" cy="${EYE_Y}" r="9" ${fill}/>
-    <circle cx="${lx + 2}" cy="${EYE_Y - 3}" r="2" fill="white"/>
-    <circle cx="${rx + 2}" cy="${EYE_Y - 3}" r="2" fill="white"/>`;
     case "sad":
       return `
     <path d="M ${lx - 10} ${EYE_Y - 10} Q ${lx} ${EYE_Y} ${lx + 10} ${EYE_Y - 10}" ${stroke}/>
     <path d="M ${rx - 10} ${EYE_Y - 10} Q ${rx} ${EYE_Y} ${rx + 10} ${EYE_Y - 10}" ${stroke}/>
-    <path d="M ${lx} ${EYE_Y + 5} L ${lx - 4} ${EYE_Y + 18}" stroke="#5BA8FF" stroke-width="3" fill="none"/>
-    <path d="M ${rx} ${EYE_Y + 5} L ${rx + 4} ${EYE_Y + 18}" stroke="#5BA8FF" stroke-width="3" fill="none"/>`;
+    <path d="M ${lx} ${EYE_Y + 5} L ${lx - 4} ${EYE_Y + 18}" stroke="var(--tear)" stroke-width="3" fill="none"/>
+    <path d="M ${rx} ${EYE_Y + 5} L ${rx + 4} ${EYE_Y + 18}" stroke="var(--tear)" stroke-width="3" fill="none"/>`;
     case "sick":
       return `
     <path d="M ${lx - 8} ${EYE_Y - 8} L ${lx + 8} ${EYE_Y + 8} M ${lx + 8} ${EYE_Y - 8} L ${lx - 8} ${EYE_Y + 8}" stroke="${outline}" stroke-width="3"/>
@@ -24167,8 +24205,251 @@ function renderEyes(mood, outline) {
       return `
     <circle cx="${lx}" cy="${EYE_Y}" r="10" fill="none" stroke="${outline}" stroke-width="2"/>
     <circle cx="${rx}" cy="${EYE_Y}" r="10" fill="none" stroke="${outline}" stroke-width="2"/>`;
+    // Baseline moods read eyeKind.
+    case "happy":
+    case "excited":
+    default:
+      return baselineEyes(eyeKind, lx, rx, outline, mood === "excited");
   }
 }
+function baselineEyes(eyeKind, lx, rx, outline, hyped) {
+  switch (eyeKind) {
+    case "round": {
+      if (hyped) {
+        return `
+    <circle cx="${lx}" cy="${EYE_Y}" r="9" fill="${outline}"/>
+    <circle cx="${rx}" cy="${EYE_Y}" r="9" fill="${outline}"/>
+    <circle cx="${lx + 2}" cy="${EYE_Y - 3}" r="2" fill="white"/>
+    <circle cx="${rx + 2}" cy="${EYE_Y - 3}" r="2" fill="white"/>`;
+      }
+      return `
+    <path d="M ${lx - 10} ${EYE_Y} Q ${lx} ${EYE_Y - 10} ${lx + 10} ${EYE_Y}" stroke="${outline}" stroke-width="3" fill="none"/>
+    <path d="M ${rx - 10} ${EYE_Y} Q ${rx} ${EYE_Y - 10} ${rx + 10} ${EYE_Y}" stroke="${outline}" stroke-width="3" fill="none"/>`;
+    }
+    case "almond":
+      return `
+    <ellipse cx="${lx}" cy="${EYE_Y}" rx="10" ry="5" fill="none" stroke="${outline}" stroke-width="2.5"/>
+    <ellipse cx="${rx}" cy="${EYE_Y}" rx="10" ry="5" fill="none" stroke="${outline}" stroke-width="2.5"/>
+    <circle cx="${lx}" cy="${EYE_Y}" r="2.5" fill="${outline}"/>
+    <circle cx="${rx}" cy="${EYE_Y}" r="2.5" fill="${outline}"/>`;
+    case "bead":
+      return `
+    <circle cx="${lx}" cy="${EYE_Y}" r="4" fill="${outline}"/>
+    <circle cx="${rx}" cy="${EYE_Y}" r="4" fill="${outline}"/>`;
+    case "wide":
+      return `
+    <ellipse cx="${lx}" cy="${EYE_Y}" rx="11" ry="13" fill="white" stroke="${outline}" stroke-width="2"/>
+    <ellipse cx="${rx}" cy="${EYE_Y}" rx="11" ry="13" fill="white" stroke="${outline}" stroke-width="2"/>
+    <ellipse cx="${lx}" cy="${EYE_Y + 1}" rx="3" ry="6" fill="${outline}"/>
+    <ellipse cx="${rx}" cy="${EYE_Y + 1}" rx="3" ry="6" fill="${outline}"/>`;
+  }
+}
+
+// ../../packages/render-svg/src/parts/accessories.ts
+function pickAccessories(pet, state) {
+  const traits = new Set(pet.traits);
+  const stars = state.signals.stars ?? 0;
+  const contributors = state.signals.contributors ?? 0;
+  const lastCommit = state.signals.lastCommitDaysAgo ?? Number.POSITIVE_INFINITY;
+  return {
+    crown: stars >= 100 || traits.has("popular"),
+    glasses: contributors >= 5 || traits.has("scholarly"),
+    sparkles: lastCommit <= 7 || traits.has("active"),
+    zzz: state.mood === "sleepy" || lastCommit > 30
+  };
+}
+function renderAccessories(pet, state, outline, detail) {
+  const flags = pickAccessories(pet, state);
+  const accent = pet.palette.accent;
+  const parts = [];
+  if (flags.crown) {
+    if (detail === "compact") {
+      parts.push(`
+    <g aria-label="crown">
+      <path d="M 150 80 L 160 100 L 170 85 L 180 100 L 190 85 L 200 100 L 210 85 L 220 100 L 230 85 L 240 100 L 250 80 L 150 80 Z"
+            fill="${accent}" stroke="${outline}" stroke-width="2" vector-effect="non-scaling-stroke"/>
+    </g>`);
+    } else {
+      parts.push(`
+    <g aria-label="crown">
+      <path d="M 150 80 L 160 100 L 170 85 L 180 100 L 190 85 L 200 100 L 210 85 L 220 100 L 230 85 L 240 100 L 250 80 L 150 80 Z"
+            fill="${accent}" stroke="${outline}" stroke-width="2" vector-effect="non-scaling-stroke"/>
+      <circle cx="165" cy="85" r="4" fill="#FF6B6B"/>
+      <circle cx="200" cy="80" r="4" fill="#FF6B6B"/>
+      <circle cx="235" cy="85" r="4" fill="#FF6B6B"/>
+    </g>`);
+    }
+  }
+  if (flags.glasses && detail === "full") {
+    parts.push(`
+    <g aria-label="glasses" opacity="0.85">
+      <circle cx="${FACE_CX - EYE_OFFSET}" cy="${EYE_Y}" r="20" fill="none" stroke="${outline}" stroke-width="2"/>
+      <circle cx="${FACE_CX + EYE_OFFSET}" cy="${EYE_Y}" r="20" fill="none" stroke="${outline}" stroke-width="2"/>
+      <line x1="${FACE_CX - EYE_OFFSET + 20}" y1="${EYE_Y}" x2="${FACE_CX + EYE_OFFSET - 20}" y2="${EYE_Y}" stroke="${outline}" stroke-width="2"/>
+    </g>`);
+  }
+  if (flags.sparkles && detail === "full") {
+    parts.push(`
+    <g aria-label="sparkles">
+      <path d="M 320 120 L 325 130 L 330 120 L 325 110 Z" fill="${accent}"/>
+      <path d="M 70 120 L 75 130 L 80 120 L 75 110 Z" fill="${accent}"/>
+      <path d="M 200 50 L 205 60 L 210 50 L 205 40 Z" fill="${accent}"/>
+    </g>`);
+  }
+  if (flags.zzz && detail === "full") {
+    parts.push(`
+    <g aria-label="zzz" font-family="monospace" font-weight="bold" fill="${outline}">
+      <text x="290" y="100" font-size="22">Z</text>
+      <text x="310" y="80" font-size="16">z</text>
+      <text x="325" y="65" font-size="12">z</text>
+    </g>`);
+  }
+  return parts.join("");
+}
+
+// ../../packages/render-svg/src/parts/body.ts
+var BODY_CX = 200;
+var BODY_CY = 180;
+function renderBody(silhouette, radius, fillUrl, outline) {
+  const r = num(radius);
+  const ry = num(radius * 1.1);
+  switch (silhouette) {
+    case "round":
+      return `<ellipse cx="${BODY_CX}" cy="${BODY_CY}" rx="${r}" ry="${ry}" fill="${fillUrl}" stroke="${outline}" stroke-width="3" vector-effect="non-scaling-stroke"/>`;
+    case "teardrop": {
+      const topY = BODY_CY - radius * 1.15;
+      const leftX = BODY_CX - radius * 1.05;
+      const rightX = BODY_CX + radius * 1.05;
+      const bottomY = BODY_CY + radius * 1.15;
+      const topCtrl = radius * 0.55;
+      const top = num(topY);
+      const left = num(leftX);
+      const right = num(rightX);
+      const bottom = num(bottomY);
+      return `<path d="M ${BODY_CX} ${top}
+        C ${num(BODY_CX - topCtrl)} ${top}
+          ${left} ${num(BODY_CY - radius * 0.3)}
+          ${left} ${num(BODY_CY + radius * 0.2)}
+        C ${left} ${bottom}
+          ${right} ${bottom}
+          ${right} ${num(BODY_CY + radius * 0.2)}
+        C ${right} ${num(BODY_CY - radius * 0.3)}
+          ${num(BODY_CX + topCtrl)} ${top}
+          ${BODY_CX} ${top} Z"
+        fill="${fillUrl}" stroke="${outline}" stroke-width="3" vector-effect="non-scaling-stroke"/>`;
+    }
+    case "oval-wide":
+      return `<ellipse cx="${BODY_CX}" cy="${BODY_CY}" rx="${num(radius * 1.25)}" ry="${num(radius * 0.85)}" fill="${fillUrl}" stroke="${outline}" stroke-width="3" vector-effect="non-scaling-stroke"/>`;
+    case "lumpy": {
+      const leftX = BODY_CX - radius;
+      const rightX = BODY_CX + radius;
+      const topY = BODY_CY - radius * 1.05;
+      const bottomY = BODY_CY + radius * 1.05;
+      const bumpOut = radius * 0.25;
+      const left = num(leftX);
+      const right = num(rightX);
+      const top = num(topY);
+      const bottom = num(bottomY);
+      return `<path d="M ${BODY_CX} ${top}
+        C ${num(BODY_CX - radius * 0.6)} ${top}
+          ${num(leftX - bumpOut)} ${num(BODY_CY - radius * 0.3)}
+          ${left} ${BODY_CY}
+        C ${num(leftX - bumpOut)} ${num(BODY_CY + radius * 0.5)}
+          ${num(BODY_CX - radius * 0.6)} ${bottom}
+          ${BODY_CX} ${bottom}
+        C ${num(BODY_CX + radius * 0.6)} ${bottom}
+          ${num(rightX + bumpOut)} ${num(BODY_CY + radius * 0.5)}
+          ${right} ${BODY_CY}
+        C ${num(rightX + bumpOut)} ${num(BODY_CY - radius * 0.3)}
+          ${num(BODY_CX + radius * 0.6)} ${top}
+          ${BODY_CX} ${top} Z"
+        fill="${fillUrl}" stroke="${outline}" stroke-width="3" vector-effect="non-scaling-stroke"/>`;
+    }
+  }
+}
+function num(x) {
+  return Number(x.toFixed(2)).toString();
+}
+
+// ../../packages/render-svg/src/parts/cheeks.ts
+var CHEEK_Y = BODY_CY + 10;
+var CHEEK_OFFSET = 80;
+function renderCheeks(cheekKind, pet) {
+  switch (cheekKind) {
+    case "blush-pink":
+      return `
+    <ellipse cx="${BODY_CX - CHEEK_OFFSET}" cy="${CHEEK_Y}" rx="14" ry="9" fill="var(--blush)" opacity="0.7"/>
+    <ellipse cx="${BODY_CX + CHEEK_OFFSET}" cy="${CHEEK_Y}" rx="14" ry="9" fill="var(--blush)" opacity="0.7"/>`;
+    case "freckles": {
+      const accent = pet.palette.accent;
+      return `
+    <g opacity="0.7" fill="${accent}">
+      <circle cx="${BODY_CX - CHEEK_OFFSET - 6}" cy="${CHEEK_Y - 4}" r="2"/>
+      <circle cx="${BODY_CX - CHEEK_OFFSET + 2}" cy="${CHEEK_Y + 2}" r="2"/>
+      <circle cx="${BODY_CX - CHEEK_OFFSET + 8}" cy="${CHEEK_Y - 2}" r="2"/>
+      <circle cx="${BODY_CX + CHEEK_OFFSET - 8}" cy="${CHEEK_Y - 2}" r="2"/>
+      <circle cx="${BODY_CX + CHEEK_OFFSET - 2}" cy="${CHEEK_Y + 2}" r="2"/>
+      <circle cx="${BODY_CX + CHEEK_OFFSET + 6}" cy="${CHEEK_Y - 4}" r="2"/>
+    </g>`;
+    }
+    case "none":
+      return "";
+  }
+}
+
+// ../../packages/render-svg/src/parts/ears.ts
+var EAR_LX = BODY_CX - 60;
+var EAR_RX = BODY_CX + 60;
+var EAR_TOP_Y = 120;
+function renderEars(earKind, pet, outline, detail) {
+  const fill = pet.palette.primary;
+  const accent = pet.palette.accent;
+  if (detail === "compact") {
+    switch (earKind) {
+      case "none":
+        return `
+    <circle cx="${BODY_CX}" cy="80" r="3" fill="${outline}"/>`;
+      case "horn-2":
+        return `
+    <path d="M ${EAR_LX - 6} ${EAR_TOP_Y - 5} L ${EAR_LX} ${EAR_TOP_Y - 30} L ${EAR_LX + 6} ${EAR_TOP_Y - 5} Z" fill="${accent}"/>
+    <path d="M ${EAR_RX - 6} ${EAR_TOP_Y - 5} L ${EAR_RX} ${EAR_TOP_Y - 30} L ${EAR_RX + 6} ${EAR_TOP_Y - 5} Z" fill="${accent}"/>`;
+      default:
+        return `
+    <circle cx="${EAR_LX}" cy="${EAR_TOP_Y}" r="22" fill="${fill}"/>
+    <circle cx="${EAR_RX}" cy="${EAR_TOP_Y}" r="22" fill="${fill}"/>`;
+    }
+  }
+  switch (earKind) {
+    case "pointed-2":
+      return `
+    <ellipse cx="${EAR_LX}" cy="${EAR_TOP_Y}" rx="25" ry="35" fill="${fill}" stroke="${outline}" stroke-width="2"/>
+    <ellipse cx="${EAR_RX}" cy="${EAR_TOP_Y}" rx="25" ry="35" fill="${fill}" stroke="${outline}" stroke-width="2"/>`;
+    case "round-2":
+      return `
+    <circle cx="${EAR_LX}" cy="${EAR_TOP_Y}" r="28" fill="${fill}" stroke="${outline}" stroke-width="2"/>
+    <circle cx="${EAR_RX}" cy="${EAR_TOP_Y}" r="28" fill="${fill}" stroke="${outline}" stroke-width="2"/>`;
+    case "floppy-2":
+      return `
+    <path d="M ${EAR_LX - 18} ${EAR_TOP_Y - 10} Q ${EAR_LX - 28} ${EAR_TOP_Y + 30} ${EAR_LX} ${EAR_TOP_Y + 38} Q ${EAR_LX + 14} ${EAR_TOP_Y + 10} ${EAR_LX - 18} ${EAR_TOP_Y - 10} Z" fill="${fill}" stroke="${outline}" stroke-width="2"/>
+    <path d="M ${EAR_RX + 18} ${EAR_TOP_Y - 10} Q ${EAR_RX + 28} ${EAR_TOP_Y + 30} ${EAR_RX} ${EAR_TOP_Y + 38} Q ${EAR_RX - 14} ${EAR_TOP_Y + 10} ${EAR_RX + 18} ${EAR_TOP_Y - 10} Z" fill="${fill}" stroke="${outline}" stroke-width="2"/>`;
+    case "tuft-3":
+      return `
+    <path d="M ${BODY_CX - 30} 90 L ${BODY_CX - 18} 70 L ${BODY_CX - 6} 90 Z" fill="${fill}" stroke="${outline}" stroke-width="2"/>
+    <path d="M ${BODY_CX - 8} 85 L ${BODY_CX} 60 L ${BODY_CX + 8} 85 Z" fill="${fill}" stroke="${outline}" stroke-width="2"/>
+    <path d="M ${BODY_CX + 6} 90 L ${BODY_CX + 18} 70 L ${BODY_CX + 30} 90 Z" fill="${fill}" stroke="${outline}" stroke-width="2"/>`;
+    case "none":
+      return `
+    <circle cx="${BODY_CX}" cy="80" r="3" fill="${outline}"/>
+    <line x1="${BODY_CX}" y1="80" x2="${BODY_CX}" y2="95" stroke="${outline}" stroke-width="2"/>`;
+    case "horn-2":
+      return `
+    <path d="M ${EAR_LX - 8} ${EAR_TOP_Y - 5} L ${EAR_LX} ${EAR_TOP_Y - 38} L ${EAR_LX + 8} ${EAR_TOP_Y - 5} Z" fill="${accent}" stroke="${outline}" stroke-width="2"/>
+    <path d="M ${EAR_RX - 8} ${EAR_TOP_Y - 5} L ${EAR_RX} ${EAR_TOP_Y - 38} L ${EAR_RX + 8} ${EAR_TOP_Y - 5} Z" fill="${accent}" stroke="${outline}" stroke-width="2"/>`;
+  }
+}
+
+// ../../packages/render-svg/src/parts/mouth.ts
+var MOUTH_Y = 220;
 function renderMouth(mood, happiness, outline) {
   const stroke = `stroke="${outline}" stroke-width="3" fill="none"`;
   switch (mood) {
@@ -24191,77 +24472,117 @@ function renderMouth(mood, happiness, outline) {
       return `<circle cx="${FACE_CX}" cy="${MOUTH_Y + 4}" r="6" fill="${outline}"/>`;
   }
 }
-function pickAccessories(pet, state) {
-  const traits = new Set(pet.traits);
-  const stars = state.signals.stars ?? 0;
-  const contributors = state.signals.contributors ?? 0;
-  const lastCommit = state.signals.lastCommitDaysAgo ?? Number.POSITIVE_INFINITY;
+
+// ../../packages/render-svg/src/parts/trinket.ts
+function renderTrinket(trinket, pet, outline) {
+  const accent = pet.palette.accent;
+  switch (trinket) {
+    case "collar":
+      return `
+    <g aria-label="collar">
+      <path d="M ${BODY_CX - 70} ${BODY_CY + 60} Q ${BODY_CX} ${BODY_CY + 78} ${BODY_CX + 70} ${BODY_CY + 60}" stroke="${accent}" stroke-width="6" fill="none" stroke-linecap="round"/>
+      <circle cx="${BODY_CX}" cy="${BODY_CY + 78}" r="5" fill="${accent}" stroke="${outline}" stroke-width="1.5"/>
+    </g>`;
+    case "bowtie":
+      return `
+    <g aria-label="bowtie">
+      <path d="M ${BODY_CX - 22} ${BODY_CY + 70} L ${BODY_CX - 6} ${BODY_CY + 64} L ${BODY_CX - 6} ${BODY_CY + 80} Z" fill="${accent}" stroke="${outline}" stroke-width="1.5"/>
+      <path d="M ${BODY_CX + 22} ${BODY_CY + 70} L ${BODY_CX + 6} ${BODY_CY + 64} L ${BODY_CX + 6} ${BODY_CY + 80} Z" fill="${accent}" stroke="${outline}" stroke-width="1.5"/>
+      <rect x="${BODY_CX - 6}" y="${BODY_CY + 66}" width="12" height="12" rx="2" fill="${accent}" stroke="${outline}" stroke-width="1.5"/>
+    </g>`;
+    case "belly-patch":
+      return `<ellipse aria-label="belly-patch" cx="${BODY_CX}" cy="${BODY_CY + 30}" rx="34" ry="22" fill="white" opacity="0.35"/>`;
+    case "tail-tuft":
+      return `
+    <g aria-label="tail-tuft">
+      <path d="M ${BODY_CX + 95} ${BODY_CY + 45} Q ${BODY_CX + 120} ${BODY_CY + 30} ${BODY_CX + 130} ${BODY_CY + 50} Q ${BODY_CX + 120} ${BODY_CY + 60} ${BODY_CX + 95} ${BODY_CY + 45} Z" fill="${pet.palette.secondary}" stroke="${outline}" stroke-width="2"/>
+    </g>`;
+    case "whisker-3":
+      return `
+    <g aria-label="whisker-3" stroke="${outline}" stroke-width="1.5" stroke-linecap="round">
+      <line x1="${BODY_CX - 90}" y1="${BODY_CY - 5}" x2="${BODY_CX - 60}" y2="${BODY_CY - 8}"/>
+      <line x1="${BODY_CX - 92}" y1="${BODY_CY + 5}" x2="${BODY_CX - 60}" y2="${BODY_CY + 4}"/>
+      <line x1="${BODY_CX - 88}" y1="${BODY_CY + 14}" x2="${BODY_CX - 60}" y2="${BODY_CY + 14}"/>
+      <line x1="${BODY_CX + 60}" y1="${BODY_CY - 8}" x2="${BODY_CX + 90}" y2="${BODY_CY - 5}"/>
+      <line x1="${BODY_CX + 60}" y1="${BODY_CY + 4}" x2="${BODY_CX + 92}" y2="${BODY_CY + 5}"/>
+      <line x1="${BODY_CX + 60}" y1="${BODY_CY + 14}" x2="${BODY_CX + 88}" y2="${BODY_CY + 14}"/>
+    </g>`;
+    case "none":
+      return "";
+  }
+}
+
+// ../../packages/render-svg/src/theme.ts
+var LIGHT = {
+  outline: "#1A1A1A",
+  blush: "#FFB6C1",
+  tear: "#5BA8FF"
+};
+var DARK = {
+  outline: "#E8E8E8",
+  blush: "#FF8FA3",
+  tear: "#87C5FF"
+};
+function rootRule(c) {
+  return `:root { --outline: ${c.outline}; --blush: ${c.blush}; --tear: ${c.tear}; }`;
+}
+function resolveTheme(theme) {
+  if (theme === "auto") {
+    return {
+      styleBlock: `<style>
+    ${rootRule(LIGHT)}
+    @media (prefers-color-scheme: dark) {
+      ${rootRule(DARK)}
+    }
+  </style>`
+    };
+  }
   return {
-    crown: stars >= 100 || traits.has("popular"),
-    glasses: contributors >= 5 || traits.has("scholarly"),
-    sparkles: lastCommit <= 7 || traits.has("active"),
-    zzz: state.mood === "sleepy" || lastCommit > 30
+    styleBlock: `<style>
+    ${rootRule(theme === "dark" ? DARK : LIGHT)}
+  </style>`
   };
 }
-function renderAccessories(pet, state) {
-  const flags = pickAccessories(pet, state);
-  const accent = pet.palette.accent;
-  const outline = pet.palette.outline;
-  const parts = [];
-  if (flags.crown) {
-    parts.push(`
-    <g aria-label="crown">
-      <path d="M 150 80 L 160 100 L 170 85 L 180 100 L 190 85 L 200 100 L 210 85 L 220 100 L 230 85 L 240 100 L 250 80 L 150 80 Z"
-            fill="${accent}" stroke="${outline}" stroke-width="2"/>
-      <circle cx="165" cy="85" r="4" fill="#FF6B6B"/>
-      <circle cx="200" cy="80" r="4" fill="#FF6B6B"/>
-      <circle cx="235" cy="85" r="4" fill="#FF6B6B"/>
-    </g>`);
-  }
-  if (flags.glasses) {
-    parts.push(`
-    <g aria-label="glasses" opacity="0.85">
-      <circle cx="${FACE_CX - EYE_OFFSET}" cy="${EYE_Y}" r="20" fill="none" stroke="${outline}" stroke-width="2"/>
-      <circle cx="${FACE_CX + EYE_OFFSET}" cy="${EYE_Y}" r="20" fill="none" stroke="${outline}" stroke-width="2"/>
-      <line x1="${FACE_CX - EYE_OFFSET + 20}" y1="${EYE_Y}" x2="${FACE_CX + EYE_OFFSET - 20}" y2="${EYE_Y}" stroke="${outline}" stroke-width="2"/>
-    </g>`);
-  }
-  if (flags.sparkles) {
-    parts.push(`
-    <g aria-label="sparkles">
-      <path d="M 320 120 L 325 130 L 330 120 L 325 110 Z" fill="${accent}"/>
-      <path d="M 70 120 L 75 130 L 80 120 L 75 110 Z" fill="${accent}"/>
-      <path d="M 200 50 L 205 60 L 210 50 L 205 40 Z" fill="${accent}"/>
-    </g>`);
-  }
-  if (flags.zzz) {
-    parts.push(`
-    <g aria-label="zzz" font-family="monospace" font-weight="bold" fill="${outline}">
-      <text x="290" y="100" font-size="22">Z</text>
-      <text x="310" y="80" font-size="16">z</text>
-      <text x="325" y="65" font-size="12">z</text>
-    </g>`);
-  }
-  return parts.join("");
+function resolveDetail(detail, size) {
+  if (detail === "auto") return size <= 64 ? "compact" : "full";
+  return detail;
+}
+
+// ../../packages/render-svg/src/xml.ts
+function escapeXmlText(s) {
+  return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+function escapeXmlAttr(s) {
+  return escapeXmlText(s).replace(/"/g, "&quot;").replace(/'/g, "&apos;");
 }
 
 // ../../packages/render-svg/src/index.ts
 function renderPet(pet, state, opts = {}) {
   const size = opts.size ?? 400;
   const bg = opts.background ?? "transparent";
-  const { primary, secondary, outline } = pet.palette;
+  const theme = opts.theme ?? "auto";
+  const { styleBlock } = resolveTheme(theme);
+  const themedOutline = "var(--outline)";
+  const detail = resolveDetail(opts.detail ?? "auto", size);
+  const variation = derivePetVariation(pet);
+  const { primary, secondary } = pet.palette;
   const isGhost = state.mood === "ghost" || state.signals.isArchived === true;
   const groupOpacity = isGhost ? 0.55 : 1;
-  const cx = 200;
-  const cy = 180;
-  const bodyRadius = 80 + clamp2(state.scores.health, 0, 100) / 100 * 40;
+  const radius = 80 + clamp2(state.scores.health, 0, 100) / 100 * 40;
   const gradId = `body-${pet.id}`;
   const ariaLabel = `${pet.name}: ${state.statusHeadline} (${state.mood}, level ${state.level})`;
-  const eyes = renderEyes(state.mood, outline);
-  const mouth = renderMouth(state.mood, state.scores.happiness, outline);
-  const accessories = renderAccessories(pet, state);
+  const effectiveEyeKind = detail === "compact" ? "bead" : variation.eyeKind;
+  const viewBox = detail === "compact" ? "40 40 320 320" : "0 0 400 400";
+  const body = renderBody(variation.silhouette, radius, `url(#${gradId})`, themedOutline);
+  const ears = renderEars(variation.earKind, pet, themedOutline, detail);
+  const cheeks = detail === "compact" ? "" : renderCheeks(variation.cheekKind, pet);
+  const trinket = detail === "compact" ? "" : renderTrinket(variation.trinket, pet, themedOutline);
+  const eyes = renderEyes(state.mood, effectiveEyeKind, themedOutline);
+  const mouth = renderMouth(state.mood, state.scores.happiness, themedOutline);
+  const accessories = renderAccessories(pet, state, themedOutline, detail);
   const svg = `<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 400 400" role="img" aria-label="${escapeXmlAttr(ariaLabel)}">
+<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="${viewBox}" role="img" aria-label="${escapeXmlAttr(ariaLabel)}">
+  ${styleBlock}
   <title>${escapeXmlText(pet.name)}</title>
   <desc>${escapeXmlText(state.statusHeadline)}</desc>
   <defs>
@@ -24272,21 +24593,18 @@ function renderPet(pet, state, opts = {}) {
   </defs>
   <rect width="400" height="400" fill="${bg}"/>
   <g opacity="${groupOpacity}">
-    <ellipse cx="${cx - 60}" cy="120" rx="25" ry="35" fill="${primary}" stroke="${outline}" stroke-width="2"/>
-    <ellipse cx="${cx + 60}" cy="120" rx="25" ry="35" fill="${primary}" stroke="${outline}" stroke-width="2"/>
-    <ellipse cx="${cx}" cy="${cy}" rx="${n(bodyRadius)}" ry="${n(bodyRadius * 1.1)}" fill="url(#${gradId})" stroke="${outline}" stroke-width="3"/>
-    <ellipse cx="${cx - 80}" cy="${cy + 10}" rx="14" ry="9" fill="#FFB6C1" opacity="0.55"/>
-    <ellipse cx="${cx + 80}" cy="${cy + 10}" rx="14" ry="9" fill="#FFB6C1" opacity="0.55"/>${eyes}
-    ${mouth}${accessories}
+    ${body}
+    ${cheeks}
+    ${eyes}
+    ${mouth}
+    ${trinket}
+    ${ears}${accessories}
   </g>
 </svg>`;
   return { svg, width: size, height: size };
 }
 function clamp2(value, min, max) {
   return Math.max(min, Math.min(max, value));
-}
-function n(x) {
-  return Number(x.toFixed(2)).toString();
 }
 
 // src/git.ts
