@@ -55,12 +55,14 @@ Test totals: **119 JS + 5 Swift = 124**.
 7. **macOS companion packaging** (no issue yet): Homebrew tap + notarized `.app` build, `LSUIElement = true`.
 8. **Premium pet tier** (no issue yet): optional LLM-driven personality + Imagen visualPrompt for a richer pet on the web.
 9. **Animated spritesheet support** (no issue yet, per the [openai/skills hatch-pet contract](https://github.com/openai/skills/tree/main/skills/.curated/hatch-pet)) — 8×9 atlas, 192×208 cells. Optional tier next to procedural SVG.
+10. **Lifecycle state taxonomy + state-aware SVG** ([#15](https://github.com/schmug/RepoGotchi/issues/15)). Port codex pets' lifecycle vocabulary (`idle / running / failed / review / shipped`) to `state.json` as a separate axis from emotional `mood`. Renderer emits `data-state` on root `<svg>` so per-state visual groups can light up; `<title>` carries a one-line progress hint reused by the menubar tooltip.
 
 ### Open product/design decisions
 
 - **Schema-first vs. inferred**: contract is the source of truth via JSON Schema → TS/Swift codegen. Working well; revisit if Swift codegen drift becomes painful.
 - **Web app**: deliberately not built in v0. Reconsider once the GitHub badge has traction; could be a small Astro marketing site.
 - **Spritesheet tier**: defer until procedural pets feel samey in practice.
+- **Mood vs lifecycle**: `mood` (emotional, score-derived) and `lifecycle` (activity, signal-derived; #15) are kept as separate axes. Revisit if the two start collapsing into the same visual language in practice.
 
 ---
 
