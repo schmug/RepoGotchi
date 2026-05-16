@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "petId": "653c0b44fa4d",
-  "computedAt": "2026-05-03T20:50:32.677Z",
+  "computedAt": "2026-05-16T15:37:33.816Z",
   "scores": {
     "health": 70,
     "happiness": 45,
@@ -14,7 +14,7 @@
   "statusHeadline": "Catching its breath",
   "signals": {
     "lastCommitDaysAgo": 0,
-    "openIssues": 6,
+    "openIssues": 7,
     "stars": 1,
     "isArchived": false
   },
